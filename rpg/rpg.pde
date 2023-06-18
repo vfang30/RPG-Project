@@ -1,3 +1,6 @@
+static final int EAST = 1;
+static final int WEST = 0;
+
 PImage character;
 PImage characterIdle;
 
@@ -17,6 +20,15 @@ PImage moveSix;
 PImage moveSeven;
 PImage moveEight;
 
+PImage moveOneFlip;
+PImage moveTwoFlip;
+PImage moveThreeFlip;
+PImage moveFourFlip;
+PImage moveFiveFlip;
+PImage moveSixFlip;
+PImage moveSevenFlip;
+PImage moveEightFlip;
+
 PImage areaOne;
 
 int xPos;
@@ -30,8 +42,9 @@ PImage[] idleCycle;
 PImage[] idleCycleFlipped;
 
 PImage[] runCycle;
+PImage[] runCycleFlip;
 
-PImage[] location;
+PImage[] location; 
 
 void setup() {
   size(1100, 700);
@@ -57,7 +70,7 @@ void setup() {
   idleCycleFlipped[1] = characterIdleFlip;
   
   idle = 0;
-  direction = 1;
+  direction = EAST;
   
   moveOne = loadImage("charmoveone.png");
   moveOne.resize(100, 0);
@@ -82,7 +95,7 @@ void setup() {
   
   moveEight = loadImage("charmoveeight.png");
   moveEight.resize(100, 0);
-  
+    
   runCycle = new PImage[8];
   runCycle[0] = moveOne;
   runCycle[1] = moveTwo;
@@ -92,6 +105,40 @@ void setup() {
   runCycle[5] = moveSix;
   runCycle[6] = moveSeven;
   runCycle[7] = moveEight;
+  
+  moveOneFlip = loadImage("charmoveoneflipped.png");
+  moveOneFlip.resize(100, 0);
+  
+  moveTwoFlip = loadImage("charmovetwoflipped.png");
+  moveTwoFlip.resize(100, 0);
+  
+  moveThreeFlip = loadImage("charmovethreeflipped.png");
+  moveThreeFlip.resize(95, 0);
+  
+  moveFourFlip = loadImage("charmovefourflipped.png");
+  moveFourFlip.resize(100, 0);
+  
+  moveFiveFlip = loadImage("charmovefiveflipped.png");
+  moveFiveFlip.resize(110, 0);
+  
+  moveSixFlip = loadImage("charmovesixflipped.png");
+  moveSixFlip.resize(100, 0);
+  
+  moveSevenFlip = loadImage("charmovesevenflipped.png");
+  moveSevenFlip.resize(100, 0);
+  
+  moveEightFlip = loadImage("charmoveeightflipped.png");
+  moveEightFlip.resize(100, 0);
+  
+  runCycleFlip = new PImage[8];
+  runCycleFlip[0] = moveOneFlip;
+  runCycleFlip[1] = moveTwoFlip;
+  runCycleFlip[2] = moveThreeFlip;
+  runCycleFlip[3] = moveFourFlip;
+  runCycleFlip[4] = moveFiveFlip;
+  runCycleFlip[5] = moveSixFlip;
+  runCycleFlip[6] = moveSevenFlip;
+  runCycleFlip[7] = moveEightFlip;
   
   areaOne = loadImage("areaone.png");
   areaOne.resize(1100, 700);
@@ -149,12 +196,12 @@ void movement(){
     
   loadBackground();
   xPos = xPos - movementSpeed;
-  direction = 0;
+  direction = WEST;
   
     if (currentRun > 7){
     currentRun = 0;
   }
-  image(runCycle[(int)currentRun], xPos, yPos);
+  image(runCycleFlip[(int)currentRun], xPos, yPos);
   currentRun +=.05;
   
   moved = true;
@@ -164,7 +211,7 @@ void movement(){
     
   loadBackground();
   xPos = xPos + movementSpeed;
-  direction = 1;
+  direction = EAST;
   
     if (currentRun > 7){
     currentRun = 0;
