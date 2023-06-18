@@ -9,45 +9,48 @@ PImage moveSix;
 PImage moveSeven;
 PImage moveEight;
 
+PImage areaOne;
+
 int xPos;
 int yPos;
 
 double currentRun;
 int movementSpeed;
-int delay;
 
 Controller keyboardInput;
 PImage[] runCycle;
 
+PImage[] location;
+
 void setup() {
-  size(900, 900);
+  size(1100, 700);
   
   character = loadImage("character.png");
-  character.resize(80, 0);
+  character.resize(100, 0);
   
   moveOne = loadImage("charmoveone.png");
-  moveOne.resize(80, 0);
+  moveOne.resize(100, 0);
   
   moveTwo = loadImage("charmovetwo.png");
-  moveTwo.resize(80, 0);
+  moveTwo.resize(100, 0);
   
   moveThree = loadImage("charmovethree.png");
-  moveThree.resize(80, 0);
+  moveThree.resize(100, 0);
   
   moveFour = loadImage("charmovefour.png");
-  moveFour.resize(80, 0);
+  moveFour.resize(100, 0);
   
   moveFive = loadImage("charmovefive.png");
-  moveFive.resize(80, 0);
+  moveFive.resize(100, 0);
   
   moveSix = loadImage("charmovesix.png");
-  moveSix.resize(80, 0);
+  moveSix.resize(100, 0);
   
   moveSeven = loadImage("charmoveseven.png");
-  moveSeven.resize(80, 0);
+  moveSeven.resize(100, 0);
   
   moveEight = loadImage("charmoveeight.png");
-  moveEight.resize(80, 0);
+  moveEight.resize(100, 0);
   
   runCycle = new PImage[8];
   runCycle[0] = moveOne;
@@ -59,12 +62,17 @@ void setup() {
   runCycle[6] = moveSeven;
   runCycle[7] = moveEight;
   
+  areaOne = loadImage("areaone.png");
+  areaOne.resize(1100, 700);
+
+  
+  location = new PImage[8];
+  
   xPos = 450;
   yPos = 450;
   
   movementSpeed = 10;
   currentRun = 0;
-  delay = 0;
   
   keyboardInput = new Controller();
   
@@ -82,22 +90,18 @@ void keyReleased() {
 //Visualize which keys are being held down...
 void draw() {
   background(255);
+  image(areaOne, 0, 0);
   image(character, xPos, yPos);
-
-  if (delay > 0){
-    delay -=1;
-  }
   
-  if (delay == 0){
   movement();
-  }
   
 }
 
 void movement(){
   
+  
   if (keyboardInput.isPressed(Controller.MOVE_LEFT) && xPos > 0) {
-  background(255);
+  loadBackground();
   xPos = xPos - movementSpeed;
   
     if (currentRun > 7){
@@ -107,8 +111,8 @@ void movement(){
   currentRun +=.2;
   }
 
-  if (keyboardInput.isPressed(Controller.MOVE_RIGHT) && xPos < 800) {
-  background(255);
+  if (keyboardInput.isPressed(Controller.MOVE_RIGHT) && xPos < 1000) {
+  loadBackground();
   xPos = xPos + movementSpeed;
   
     if (currentRun > 7){
@@ -119,7 +123,7 @@ void movement(){
   }
   
   if (keyboardInput.isPressed(Controller.MOVE_UP) && yPos > 0) {
-  background(255);
+  loadBackground();
   yPos = yPos - movementSpeed;
   
     if (currentRun > 7){
@@ -129,8 +133,8 @@ void movement(){
   currentRun +=.2;
   }
   
-  if (keyboardInput.isPressed(Controller.MOVE_DOWN) && yPos < 750) {
-  background(255);
+  if (keyboardInput.isPressed(Controller.MOVE_DOWN) && yPos < 550) {
+  loadBackground();
   yPos = yPos + movementSpeed;
   
    if (currentRun > 7){
@@ -139,6 +143,8 @@ void movement(){
   image(runCycle[(int)currentRun], xPos, yPos);
   currentRun +=.2;
   }
-  
-  
+}
+
+void loadBackground(){
+  image(areaOne, 0, 0);
 }
