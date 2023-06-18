@@ -3,6 +3,7 @@ class Player {
 static final int EAST = 1;
 static final int WEST = 0;
 
+//Sprites
 String idlePath = sketchPath("data\\idle\\normal");
 String[] idle = listFileNames(idlePath);
 
@@ -18,7 +19,8 @@ String[] runFlip = listFileNames(runPathFlip);
 String jumpPath = sketchPath("data\\jump\\normal");
 String[] jump = listFileNames(jumpPath);
 
-int direction;
+String jumpPathFlip = sketchPath("data\\jump\\flip");
+String[] jumpFlip = listFileNames(jumpPathFlip);
 
 PImage[] idleCycle = new PImage[2];
 PImage[] idleCycleFlipped = new PImage[2];
@@ -27,9 +29,13 @@ PImage[] runCycle = new PImage[8];
 PImage[] runCycleFlipped = new PImage[8];
 
 PImage[] jumpCycle = new PImage[8];
+PImage[] jumpCycleFlipped = new PImage[8];
 
+
+//Position
 float xPos;
 float yPos;
+int direction;
 
   public Player(){
   xPos = 450;
@@ -71,7 +77,12 @@ float yPos;
     jumpCycle[i] = image;
   }
   
-  
+  //flipped jump sprites
+  for (int i = 0; i < 8; i +=1){
+    PImage image = loadImage("jump/flip/"+jumpFlip[i]);
+    image.resize(150, 0);
+    jumpCycleFlipped[i] = image;
+  }
 
   
   }
