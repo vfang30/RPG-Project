@@ -6,19 +6,18 @@ static final int WEST = 0;
 String idlePath = sketchPath("data\\idle\\normal");
 String[] idle = listFileNames(idlePath);
 
-int direction;
+String idlePathFlip = sketchPath("data\\idle\\flip");
+String[] idleFlip = listFileNames(idlePathFlip);
 
-PImage characterFlip;
-PImage characterIdleFlip;  
+String runPath = sketchPath("data\\run\\normal");
+String[] run = listFileNames(runPath);
+
+String runPathFlip = sketchPath("data\\run\\flip");
+String[] runFlip = listFileNames(runPathFlip);
+
+int direction;
   
-PImage moveOne;
-PImage moveTwo;
-PImage moveThree;
-PImage moveFour;
-PImage moveFive;
-PImage moveSix;
-PImage moveSeven;
-PImage moveEight;
+
 
 PImage moveOneFlip;
 PImage moveTwoFlip;
@@ -42,7 +41,7 @@ PImage[] idleCycle = new PImage[2];
 PImage[] idleCycleFlipped = new PImage[2];
 
 PImage[] runCycle = new PImage[8];
-PImage[] runCycleFlip = new PImage[8];
+PImage[] runCycleFlipped = new PImage[8];
 
 PImage[] jumpCycle = new PImage[8];
 
@@ -50,92 +49,72 @@ float xPos;
 float yPos;
 
   public Player(){
-    printArray(idle);
+    printArray(run);
   xPos = 450;
   yPos = 490;
   direction = EAST;
-  
-  characterFlip = loadImage("idle/characterflipped.png");
-  characterFlip.resize(150, 0);
-  
-  characterIdleFlip = loadImage("idle/characteridleflipped.png");
-  characterIdleFlip.resize(150, 0);
-  
-  
+ 
+  //normal idle sprites
   for (int i = 0; i < 2; i +=1){
     PImage image = loadImage("idle/normal/"+idle[i]);
     image.resize(150, 0);
     idleCycle[i] = image;
   }
   
-  idleCycleFlipped[0] = characterFlip;
-  idleCycleFlipped[1] = characterIdleFlip;
+  //flipped idle sprites
+  for (int i = 0; i < 2; i +=1){
+    PImage image = loadImage("idle/flip/"+idleFlip[i]);
+    image.resize(150, 0);
+    idleCycleFlipped[i] = image;
+  }
   
-  moveOne = loadImage("move/charmoveone.png");
-  moveOne.resize(150, 0);
+  //run sprites
+  for (int i = 0; i < 8; i +=1){
+    PImage image = loadImage("run/normal/"+run[i]);
+    image.resize(150, 0);
+    runCycle[i] = image;
+  }
   
-  moveTwo = loadImage("move/charmovetwo.png");
-  moveTwo.resize(150, 0);
+  //flipped run sprites
+  for (int i = 0; i < 8; i +=1){
+    PImage image = loadImage("run/flip/"+runFlip[i]);
+    image.resize(150, 0);
+    runCycleFlipped[i] = image;
+  }
   
-  moveThree = loadImage("move/charmovethree.png");
-  moveThree.resize(150, 0);
   
-  moveFour = loadImage("move/charmovefour.png");
-  moveFour.resize(150, 0);
+  //moveOneFlip = loadImage("move/charmoveoneflipped.png");
+  //moveOneFlip.resize(150, 0);
   
-  moveFive = loadImage("move/charmovefive.png");
-  moveFive.resize(150, 0);
+  //moveTwoFlip = loadImage("move/charmovetwoflipped.png");
+  //moveTwoFlip.resize(150, 0);
   
-  moveSix = loadImage("move/charmovesix.png");
-  moveSix.resize(150, 0);
+  //moveThreeFlip = loadImage("move/charmovethreeflipped.png");
+  //moveThreeFlip.resize(150, 0);
   
-  moveSeven = loadImage("move/charmoveseven.png");
-  moveSeven.resize(150, 0);
+  //moveFourFlip = loadImage("move/charmovefourflipped.png");
+  //moveFourFlip.resize(150, 0);
   
-  moveEight = loadImage("move/charmoveeight.png");
-  moveEight.resize(150, 0);
-    
-  runCycle[0] = moveOne;
-  runCycle[1] = moveTwo;
-  runCycle[2] = moveThree;
-  runCycle[3] = moveFour;
-  runCycle[4] = moveFive;
-  runCycle[5] = moveSix;
-  runCycle[6] = moveSeven;
-  runCycle[7] = moveEight;
+  //moveFiveFlip = loadImage("move/charmovefiveflipped.png");
+  //moveFiveFlip.resize(150, 0);
   
-  moveOneFlip = loadImage("move/charmoveoneflipped.png");
-  moveOneFlip.resize(150, 0);
+  //moveSixFlip = loadImage("move/charmovesixflipped.png");
+  //moveSixFlip.resize(150, 0);
   
-  moveTwoFlip = loadImage("move/charmovetwoflipped.png");
-  moveTwoFlip.resize(150, 0);
+  //moveSevenFlip = loadImage("move/charmovesevenflipped.png");
+  //moveSevenFlip.resize(150, 0);
   
-  moveThreeFlip = loadImage("move/charmovethreeflipped.png");
-  moveThreeFlip.resize(150, 0);
+  //moveEightFlip = loadImage("move/charmoveeightflipped.png");
+  //moveEightFlip.resize(150, 0);
   
-  moveFourFlip = loadImage("move/charmovefourflipped.png");
-  moveFourFlip.resize(150, 0);
-  
-  moveFiveFlip = loadImage("move/charmovefiveflipped.png");
-  moveFiveFlip.resize(150, 0);
-  
-  moveSixFlip = loadImage("move/charmovesixflipped.png");
-  moveSixFlip.resize(150, 0);
-  
-  moveSevenFlip = loadImage("move/charmovesevenflipped.png");
-  moveSevenFlip.resize(150, 0);
-  
-  moveEightFlip = loadImage("move/charmoveeightflipped.png");
-  moveEightFlip.resize(150, 0);
-  
-  runCycleFlip[0] = moveOneFlip;
-  runCycleFlip[1] = moveTwoFlip;
-  runCycleFlip[2] = moveThreeFlip;
-  runCycleFlip[3] = moveFourFlip;
-  runCycleFlip[4] = moveFiveFlip;
-  runCycleFlip[5] = moveSixFlip;
-  runCycleFlip[6] = moveSevenFlip;
-  runCycleFlip[7] = moveEightFlip;
+  //runCycleFlip[0] = moveOneFlip;
+  //runCycleFlip[1] = moveTwoFlip;
+  //runCycleFlip[2] = moveThreeFlip;
+  //runCycleFlip[3] = moveFourFlip;
+  //runCycleFlip[4] = moveFiveFlip;
+  //runCycleFlip[5] = moveSixFlip;
+  //runCycleFlip[6] = moveSevenFlip;
+  //runCycleFlip[7] = moveEightFlip;
   
   jumpOne = loadImage("jump/jumpone.png");
   jumpOne.resize(150, 0);

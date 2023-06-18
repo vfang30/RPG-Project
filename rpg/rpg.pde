@@ -122,7 +122,7 @@ void movement(){
     if (currentRun > 7){
     currentRun = 0;
   }
-  image(player.runCycleFlip[(int)currentRun], player.xPos, player.yPos);
+  image(player.runCycleFlipped[(int)currentRun], player.xPos, player.yPos);
   currentRun +=.05;
   
   moved = true;
