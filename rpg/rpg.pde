@@ -1,6 +1,7 @@
 double idle;
-float gravity = 3;
+float gravity = .8;
 float speed = 0;
+float velocity = 20;
 
 boolean jump;
 double currentJump;
@@ -45,8 +46,6 @@ void setup() {
   jump = false;
   currentJump = 1;
   
-  String path = sketchPath("data\\idle");
-  println(path);
 
 }
 
@@ -57,17 +56,19 @@ void draw() {
   playerDraw();
   movement();
   
-  if (jump){
+  if (jump && velocity > 0){
     speed = 0;
-    player.yPos = player.yPos - gravity;
+    velocity = velocity - gravity;
+    player.yPos = player.yPos - velocity;
     loadBackground();
       playerDraw();
-    if (player.yPos < 340){
+    if (player.yPos < 300){
       jump = false;
     }
   }
   
   if (!jump && player.yPos < 490){
+    velocity = 20;
     currentJump = 0;
     speed = speed + gravity;
     player.yPos = player.yPos + speed;
