@@ -46,8 +46,8 @@ PImage[] runCycleFlip;
 
 PImage[] jumpCycle;
 
-int xPos;
-int yPos;
+float xPos;
+float yPos;
 
   public Player(){
     

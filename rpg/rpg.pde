@@ -1,5 +1,5 @@
 double idle;
-int delay;
+float gravity = 3;
 
 PImage areaOne;
 
@@ -17,7 +17,6 @@ void setup() {
   
   
   idle = 0;
-  delay = 0;
   
   areaOne = loadImage("areaone.png");
   areaOne.resize(1100, 700);
@@ -46,20 +45,10 @@ void draw() {
   background(255);
   image(areaOne, 0, 0);
   
-  if (player.direction ==  1){
-   image(player.idleCycle[(int)idle], player.xPos, player.yPos);
-  }
+  playerDraw();
   
-  if (player.direction == 0){
-  image(player.idleCycleFlipped[(int)idle], player.xPos, player.yPos);
-  }
-  
-  if (delay > 0){
-    delay -=1;
-  }
-  
-  if (player.yPos < 490 && delay == 0){
-    player.yPos = 490;
+  if (player.yPos < 490){
+    player.yPos = player.yPos + gravity;
   }
   
   
@@ -70,6 +59,19 @@ void draw() {
   
   
   movement();
+  
+}
+
+void playerDraw(){
+  
+  
+  if (player.direction ==  1){
+   image(player.idleCycle[(int)idle], player.xPos, player.yPos);
+  }
+  
+  if (player.direction == 0){
+  image(player.idleCycleFlipped[(int)idle], player.xPos, player.yPos);
+  }
   
 }
 
