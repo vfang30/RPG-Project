@@ -17,6 +17,9 @@ abstract class Fighter{
     this.level = 1;
   }
   
+  public Fighter(){
+  }
+  
   //get methods
   public String getName(){
     return name;
@@ -65,6 +68,10 @@ abstract class Fighter{
 
   public String toString(){
     return this.getName();
+  }
+  
+  public void applyDamage(int amount){
+    this.hp -= amount;
   }
 
 }
