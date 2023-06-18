@@ -6,6 +6,7 @@ abstract class Fighter{
   private int mana;
   private int xp;
   private int level;
+  private PImage avatar;
   
   public Fighter(String name, int hp, int atk, int mana){
     this.name = name;

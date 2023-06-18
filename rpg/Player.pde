@@ -39,7 +39,7 @@ int direction;
 
   public Player(){
   xPos = 450;
-  yPos = 490;
+  yPos = 690;
   direction = EAST;
  
   //normal idle sprites

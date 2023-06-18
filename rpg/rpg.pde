@@ -1,7 +1,7 @@
 double idle;
 float gravity = .8;
 float speed = 0;
-float velocity = 20;
+float velocity = 40;
 
 boolean jump;
 boolean falling;
@@ -29,15 +29,15 @@ void keyReleased() {
 
 
 void setup() {
-  size(1100, 700);
+  size(1100, 900);
   
   idle = 0;
   
   areaOne = loadImage("areaone.png");
-  areaOne.resize(1100, 700);
+  areaOne.resize(1100, 900);
   
   areaZero = loadImage("areazero.png");
-  areaZero.resize(1100, 700);
+  areaZero.resize(1100, 900);
 
   
   location = new PImage[8];
@@ -68,12 +68,12 @@ void draw() {
     player.yPos = player.yPos - velocity;
     loadBackground();
       playerDraw();
-    if (player.yPos < 280){
+    if (player.yPos < 480){
       jump = false;
     }
   }
   
-  if (!jump && player.yPos < 490){
+  if (!jump && player.yPos < 690){
     velocity = 20;
     currentJump = 0;
     speed = speed + gravity;

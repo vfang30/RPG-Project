@@ -1,7 +1,8 @@
 class Vishu extends Fighter{
-
+  
   public Vishu(){
     super("Vishu", 20, 5, 20);
+    super.avatar = loadImage("idle/flip/"+"character.png");
   }
   
   public String attack(Fighter other){
