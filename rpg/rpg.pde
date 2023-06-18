@@ -1,4 +1,5 @@
 double idle;
+boolean jump;
 
 PImage areaOne;
 
@@ -16,6 +17,7 @@ void setup() {
   
   
   idle = 0;
+  jump = false;
   
   areaOne = loadImage("areaone.png");
   areaOne.resize(1100, 700);
@@ -44,8 +46,8 @@ void draw() {
   background(255);
   image(areaOne, 0, 0);
   
-  if (player.direction == 1){
-  image(player.idleCycle[(int)idle], player.xPos, player.yPos);
+  if (player.direction ==  1){
+   image(player.idleCycle[(int)idle], player.xPos, player.yPos);
   }
   
   if (player.direction == 0){
@@ -58,6 +60,7 @@ void draw() {
   idle = 0;
   }
   
+  
   movement();
   
 }
@@ -66,7 +69,19 @@ void movement(){
   
   boolean moved = false;
   
-  if (keyboardInput.isPressed(Controller.MOVE_LEFT) && player.xPos > 0) {
+  boolean jump = keyboardInput.isPressed(Controller.JUMP);
+  boolean left = keyboardInput.isPressed(Controller.MOVE_LEFT);
+  boolean right = keyboardInput.isPressed(Controller.MOVE_RIGHT);
+
+  if (jump){
+  
+  loadBackground();
+  
+  image(player.jumpCycle[0], player.xPos, player.yPos - 50);  
+  }
+
+
+  if (left && player.xPos > 40) {
     
   loadBackground();
   player.xPos = player.xPos - movementSpeed;
@@ -81,7 +96,7 @@ void movement(){
   moved = true;
   }
 
-  if (keyboardInput.isPressed(Controller.MOVE_RIGHT) && player.xPos < 1000) {
+  if (right && player.xPos < 1000) {
     
   loadBackground();
   player.xPos = player.xPos + movementSpeed;

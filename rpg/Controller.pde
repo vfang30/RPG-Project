@@ -1,6 +1,7 @@
 class Controller {
   static final int MOVE_LEFT = 0;
   static final int MOVE_RIGHT = 1;
+  static final int JUMP = 2;
   boolean [] inputs;
 
   public Controller() {
@@ -18,11 +19,14 @@ class Controller {
       inputs[MOVE_LEFT] = true;
     if(code == 'D')
       inputs[MOVE_RIGHT] = true;
+    if(code == 'W')
+      inputs[JUMP] = true;
   }
   
   void release(int code) {
     if(code == 'A')
     inputs[MOVE_LEFT] = false;
+    
     if(code == 'D')
     inputs[MOVE_RIGHT] = false;
   }
