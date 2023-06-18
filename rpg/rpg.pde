@@ -8,6 +8,7 @@ boolean falling;
 double currentJump;
 
 PImage areaOne;
+PImage areaZero;
 
 double currentRun;
 int movementSpeed;
@@ -34,11 +35,14 @@ void setup() {
   
   areaOne = loadImage("areaone.png");
   areaOne.resize(1100, 700);
+  
+  areaZero = loadImage("areazero.png");
+  areaZero.resize(1100, 700);
 
   
   location = new PImage[8];
   
-  movementSpeed = 10;
+  movementSpeed = 7;
   currentRun = 0;
   
   player = new Player();
@@ -53,7 +57,7 @@ void setup() {
 
 void draw() {
   background(255);
-  image(areaOne, 0, 0);
+  image(areaZero, 0, 0);
   
   playerDraw();
   movement();
@@ -167,7 +171,7 @@ void movement(){
 }
 
 void loadBackground(){
-  image(areaOne, 0, 0);
+  image(areaZero, 0, 0);
 }
 
 String[] listFileNames(String dir){
