@@ -2,7 +2,9 @@ class Vishu extends Fighter{
   
   public Vishu(){
     super("Vishu", 20, 5, 20);
-    super.avatar = loadImage("idle/flip/"+"character.png");
+    super.avatar = loadImage("idle/normal/"+"character.png");
+    super.avatar.resize(150, 0);
+    super.avatarIdle = loadImage("idle/normal/"+"characteridle.png");
   }
   
   public String attack(Fighter other){

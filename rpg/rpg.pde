@@ -19,6 +19,8 @@ Controller keyboardInput;
 
 PImage[] location; 
 
+Combat testing;
+
 void keyPressed() {
   keyboardInput.press(keyCode);
 }
@@ -45,13 +47,26 @@ void setup() {
   movementSpeed = 7;
   currentRun = 0;
   
-  player = new Player();
   keyboardInput = new Controller();
+  player = new Player();
   
   jump = false;
   falling = false;
   currentJump = 1;
   
+  //TESTING CODE
+  Vishu one = new Vishu();
+  Vishu two = new Vishu();
+  Vishu three = new Vishu();
+  ArrayList<Fighter> party = new ArrayList<Fighter>();
+  party.add(one);
+  party.add(two);
+  party.add(three);
+  
+  Vishu four = new Vishu();
+  ArrayList<Fighter> enemies = new ArrayList<Fighter>();
+  enemies.add(four);
+  testing = new Combat(party, enemies);
 
 }
 
@@ -59,26 +74,28 @@ void draw() {
   background(255);
   image(areaZero, 0, 0);
   
-  playerDraw();
-  movement();
+  testing.run();
   
-  if (jump && velocity > 0){
-    speed = 0;
-    velocity = velocity - gravity;
-    player.yPos = player.yPos - velocity;
-    loadBackground();
-      playerDraw();
-    if (player.yPos < 480){
-      jump = false;
-    }
-  }
+  //playerDraw();
+  //movement();
   
-  if (!jump && player.yPos < 690){
-    velocity = 20;
-    currentJump = 0;
-    speed = speed + gravity;
-    player.yPos = player.yPos + speed;
-  }
+  //if (jump && velocity > 0){
+  //  speed = 0;
+  //  velocity = velocity - gravity;
+  //  player.yPos = player.yPos - velocity;
+  //  loadBackground();
+  //    playerDraw();
+  //  if (player.yPos < 480){
+  //    jump = false;
+  //  }
+  //}
+  
+  //if (!jump && player.yPos < 690){
+  //  velocity = 20;
+  //  currentJump = 0;
+  //  speed = speed + gravity;
+  //  player.yPos = player.yPos + speed;
+  //}
   
   idle += 0.03;
   if ((int)idle > 1){
