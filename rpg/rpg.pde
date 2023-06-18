@@ -83,7 +83,7 @@ void setup() {
   xPos = 450;
   yPos = 530;
   
-  movementSpeed = 10;
+  movementSpeed = 7;
   currentRun = 0;
   
   keyboardInput = new Controller();
@@ -117,6 +117,7 @@ void draw() {
 
 void movement(){
   
+  boolean moved = false;
   
   if (keyboardInput.isPressed(Controller.MOVE_LEFT) && xPos > 0) {
   loadBackground();
@@ -126,7 +127,9 @@ void movement(){
     currentRun = 0;
   }
   image(runCycle[(int)currentRun], xPos, yPos);
-  currentRun +=.1;
+  currentRun +=.05;
+  
+  moved = true;
   }
 
   if (keyboardInput.isPressed(Controller.MOVE_RIGHT) && xPos < 1000) {
@@ -137,7 +140,13 @@ void movement(){
     currentRun = 0;
     }
   image(runCycle[(int)currentRun], xPos, yPos);
-  currentRun +=.1;
+  currentRun +=.05;
+  
+  moved = true;
+  }
+  
+  if (!moved){
+    currentRun = 0;
   }
 }
 
