@@ -16,6 +16,15 @@ Controller keyboardInput;
 
 PImage[] location; 
 
+void keyPressed() {
+  keyboardInput.press(keyCode);
+}
+
+void keyReleased() {
+  keyboardInput.release(keyCode);
+}
+
+
 void setup() {
   size(1100, 700);
   
@@ -35,15 +44,10 @@ void setup() {
   
   jump = false;
   currentJump = 1;
+  
+  String path = sketchPath("data\\idle");
+  println(path);
 
-}
-
-void keyPressed() {
-  keyboardInput.press(keyCode);
-}
-
-void keyReleased() {
-  keyboardInput.release(keyCode);
 }
 
 void draw() {
@@ -146,4 +150,14 @@ void movement(){
 
 void loadBackground(){
   image(areaOne, 0, 0);
+}
+
+String[] listFileNames(String dir){
+  File file = new File(dir);
+  if (file.isDirectory()){
+    String names[] = file.list();
+    return names;
+  }else{
+  return null;
+  }
 }
