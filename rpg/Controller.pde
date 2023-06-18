@@ -5,7 +5,7 @@ class Controller {
   boolean [] inputs;
 
   public Controller() {
-    inputs = new boolean[4];//2 valid buttons
+    inputs = new boolean[3];
   }
 
   /**@param code: a valid constant e.g. P1_LEFT

@@ -36,7 +36,7 @@ void setup() {
   
   location = new PImage[8];
   
-  movementSpeed = 7;
+  movementSpeed = 10;
   currentRun = 0;
   
   player = new Player();
@@ -92,14 +92,19 @@ void playerDraw(){
      currentJump += .8;
    }
     
+    if (player.direction == Player.EAST){
     image(player.jumpCycle[(int)currentJump], player.xPos, player.yPos);
+    }
+    if (player.direction == Player.WEST){
+    image(player.jumpCycleFlipped[(int)currentJump], player.xPos,  player.yPos);
+    }
   }
   
-  if (player.direction ==  1 && !jump){
+  if (player.direction == Player.EAST && !jump){
    image(player.idleCycle[(int)idle], player.xPos, player.yPos);
   }
   
-  if (player.direction == 0 && !jump){
+  if (player.direction == Player.WEST && !jump){
   image(player.idleCycleFlipped[(int)idle], player.xPos, player.yPos);
   }
   
@@ -119,11 +124,12 @@ void movement(){
   player.xPos = player.xPos - movementSpeed;
   player.direction = Player.WEST;
   
-    if (currentRun > 7){
-    currentRun = 0;
-  }
   image(player.runCycleFlipped[(int)currentRun], player.xPos, player.yPos);
   currentRun +=.05;
+  
+  if (currentRun > 7){
+    currentRun = 0;
+  }
   
   moved = true;
   }
@@ -134,11 +140,12 @@ void movement(){
   player.xPos = player.xPos + movementSpeed;
   player.direction = Player.EAST;
   
-    if (currentRun > 7){
-    currentRun = 0;
-    }
   image(player.runCycle[(int)currentRun], player.xPos, player.yPos);
   currentRun +=.05;
+  
+   if (currentRun > 7){
+    currentRun = 0;
+   }
   
   moved = true;
   }
