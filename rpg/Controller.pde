@@ -30,9 +30,9 @@ class Controller {
     if(code == 'D')
     inputs[MOVE_RIGHT] = false;
     
-    if (code == 'W'  && player.yPos == 490){
-     player.yPos -= 150;
+    if (code == 'W'  && player.yPos >= 490){
     inputs[JUMP] = false;
+    jump = true;
     }
   }
 }
