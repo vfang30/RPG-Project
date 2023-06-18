@@ -29,5 +29,11 @@ class Controller {
     
     if(code == 'D')
     inputs[MOVE_RIGHT] = false;
+    
+    if (code == 'W'){
+     player.yPos -= 100;
+     delay += 60;
+    inputs[JUMP] = false;
+    }
   }
 }
