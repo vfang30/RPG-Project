@@ -1,8 +1,10 @@
 double idle;
-float gravity = 3;
+float gravity = .8;
 float speed = 0;
+float velocity = 20;
 
 boolean jump;
+boolean falling;
 double currentJump;
 
 PImage areaOne;
@@ -43,10 +45,9 @@ void setup() {
   keyboardInput = new Controller();
   
   jump = false;
+  falling = false;
   currentJump = 1;
   
-  String path = sketchPath("data\\idle");
-  println(path);
 
 }
 
@@ -57,17 +58,19 @@ void draw() {
   playerDraw();
   movement();
   
-  if (jump){
+  if (jump && velocity > 0){
     speed = 0;
-    player.yPos = player.yPos - gravity;
+    velocity = velocity - gravity;
+    player.yPos = player.yPos - velocity;
     loadBackground();
       playerDraw();
-    if (player.yPos < 340){
+    if (player.yPos < 280){
       jump = false;
     }
   }
   
   if (!jump && player.yPos < 490){
+    velocity = 20;
     currentJump = 0;
     speed = speed + gravity;
     player.yPos = player.yPos + speed;
@@ -82,22 +85,11 @@ void draw() {
 
 void playerDraw(){
   
+  
   if (jump){
     
-   if (currentJump < 7 && currentJump > 2){
-    currentJump += .05;
-   }
-   
-   if (currentJump < 2){
-     currentJump += .8;
-   }
+    jump();
     
-    if (player.direction == Player.EAST){
-    image(player.jumpCycle[(int)currentJump], player.xPos, player.yPos);
-    }
-    if (player.direction == Player.WEST){
-    image(player.jumpCycleFlipped[(int)currentJump], player.xPos,  player.yPos);
-    }
   }
   
   if (player.direction == Player.EAST && !jump){
@@ -108,6 +100,25 @@ void playerDraw(){
   image(player.idleCycleFlipped[(int)idle], player.xPos, player.yPos);
   }
   
+}
+
+void jump(){
+
+  if (currentJump < 7 && currentJump > 2){
+   currentJump += 0.2;
+  }
+   
+  if (currentJump < 2){
+   currentJump += .8;
+  }
+    
+  if (player.direction == Player.EAST){
+   image(player.jumpCycle[(int)currentJump], player.xPos, player.yPos);
+   }
+   
+  if (player.direction == Player.WEST){
+   image(player.jumpCycleFlipped[(int)currentJump], player.xPos,  player.yPos);
+   }
 }
 
 void movement(){
