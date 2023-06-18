@@ -8,6 +8,7 @@ abstract class Fighter{
   private int level;
   private PImage avatar;
   private PImage avatarIdle;
+  private PImage[] idleCycle = new PImage[2];
   
   public Fighter(String name, int hp, int atk, int mana){
     this.name = name;
