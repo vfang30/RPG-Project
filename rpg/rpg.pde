@@ -69,7 +69,7 @@ void setup() {
   location = new PImage[8];
   
   xPos = 450;
-  yPos = 450;
+  yPos = 530;
   
   movementSpeed = 10;
   currentRun = 0;
@@ -108,7 +108,7 @@ void movement(){
     currentRun = 0;
   }
   image(runCycle[(int)currentRun], xPos, yPos);
-  currentRun +=.2;
+  currentRun +=.1;
   }
 
   if (keyboardInput.isPressed(Controller.MOVE_RIGHT) && xPos < 1000) {
@@ -119,29 +119,7 @@ void movement(){
     currentRun = 0;
     }
   image(runCycle[(int)currentRun], xPos, yPos);
-  currentRun +=.2;
-  }
-  
-  if (keyboardInput.isPressed(Controller.MOVE_UP) && yPos > 0) {
-  loadBackground();
-  yPos = yPos - movementSpeed;
-  
-    if (currentRun > 7){
-    currentRun = 0;
-    }
-  image(runCycle[(int)currentRun], xPos, yPos);
-  currentRun +=.2;
-  }
-  
-  if (keyboardInput.isPressed(Controller.MOVE_DOWN) && yPos < 550) {
-  loadBackground();
-  yPos = yPos + movementSpeed;
-  
-   if (currentRun > 7){
-   currentRun = 0;
-   }
-  image(runCycle[(int)currentRun], xPos, yPos);
-  currentRun +=.2;
+  currentRun +=.1;
   }
 }
 
