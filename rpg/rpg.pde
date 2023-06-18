@@ -1,14 +1,6 @@
-static final int EAST = 1;
-static final int WEST = 0;
-
-
 double idle;
-int direction;
 
 PImage areaOne;
-
-int xPos;
-int yPos;
 
 double currentRun;
 int movementSpeed;
@@ -16,11 +8,6 @@ int movementSpeed;
 Player player;
 
 Controller keyboardInput;
-PImage[] idleCycle;
-PImage[] idleCycleFlipped;
-
-PImage[] runCycle;
-PImage[] runCycleFlip;
 
 PImage[] location; 
 
@@ -29,16 +16,12 @@ void setup() {
   
   
   idle = 0;
-  direction = EAST;
   
   areaOne = loadImage("areaone.png");
   areaOne.resize(1100, 700);
 
   
   location = new PImage[8];
-  
-  xPos = 450;
-  yPos = 530;
   
   movementSpeed = 7;
   currentRun = 0;
@@ -61,12 +44,12 @@ void draw() {
   background(255);
   image(areaOne, 0, 0);
   
-  if (direction == 1){
-  image(player.idleCycle[(int)idle], xPos, yPos);
+  if (player.direction == 1){
+  image(player.idleCycle[(int)idle], player.xPos, player.yPos);
   }
   
-  if (direction == 0){
-  image(player.idleCycleFlipped[(int)idle], xPos, yPos);
+  if (player.direction == 0){
+  image(player.idleCycleFlipped[(int)idle], player.xPos, player.yPos);
   }
   
   
@@ -83,31 +66,31 @@ void movement(){
   
   boolean moved = false;
   
-  if (keyboardInput.isPressed(Controller.MOVE_LEFT) && xPos > 0) {
+  if (keyboardInput.isPressed(Controller.MOVE_LEFT) && player.xPos > 0) {
     
   loadBackground();
-  xPos = xPos - movementSpeed;
-  direction = WEST;
+  player.xPos = player.xPos - movementSpeed;
+  player.direction = Player.WEST;
   
     if (currentRun > 7){
     currentRun = 0;
   }
-  image(player.runCycleFlip[(int)currentRun], xPos, yPos);
+  image(player.runCycleFlip[(int)currentRun], player.xPos, player.yPos);
   currentRun +=.05;
   
   moved = true;
   }
 
-  if (keyboardInput.isPressed(Controller.MOVE_RIGHT) && xPos < 1000) {
+  if (keyboardInput.isPressed(Controller.MOVE_RIGHT) && player.xPos < 1000) {
     
   loadBackground();
-  xPos = xPos + movementSpeed;
-  direction = EAST;
+  player.xPos = player.xPos + movementSpeed;
+  player.direction = Player.EAST;
   
     if (currentRun > 7){
     currentRun = 0;
     }
-  image(player.runCycle[(int)currentRun], xPos, yPos);
+  image(player.runCycle[(int)currentRun], player.xPos, player.yPos);
   currentRun +=.05;
   
   moved = true;
