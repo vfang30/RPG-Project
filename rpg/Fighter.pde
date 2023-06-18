@@ -4,6 +4,8 @@ abstract class Fighter{
   private int hp, maxHP;
   private int atk;
   private int mana;
+  private int xp;
+  private int level;
   
   public Fighter(String name, int hp, int atk, int mana){
     this.name = name;
@@ -11,8 +13,11 @@ abstract class Fighter{
     this.hp = hp;
     this.atk = atk;
     this.mana = mana;
+    this.xp = 0;
+    this.level = 1;
   }
   
+  //get methods
   public String getName(){
     return name;
   }
@@ -31,6 +36,31 @@ abstract class Fighter{
   
   public int getMana(){
     return mana;
+  }
+  
+  public int getXP(){
+    return xp;
+  }
+  
+  public int level(){
+    return level;
+  }
+
+  //set methods
+  public void setHP(int health){
+    hp = health;
+  }
+  
+  public void setAtk(int attack){
+    atk = attack;
+  }
+  
+  public void setXP(int exp){
+    xp = exp;
+  }
+  
+  public void setLevel(int lvl){
+    level = lvl;
   }
 
   public String toString(){
