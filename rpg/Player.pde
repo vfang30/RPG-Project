@@ -38,13 +38,13 @@ PImage jumpSix;
 PImage jumpSeven;
 PImage jumpEight;
 
-PImage[] idleCycle;
-PImage[] idleCycleFlipped;
+PImage[] idleCycle = new PImage[2];
+PImage[] idleCycleFlipped = new PImage[2];
 
-PImage[] runCycle;
-PImage[] runCycleFlip;
+PImage[] runCycle = new PImage[8];
+PImage[] runCycleFlip = new PImage[8];
 
-PImage[] jumpCycle;
+PImage[] jumpCycle = new PImage[8];
 
 float xPos;
 float yPos;
@@ -67,11 +67,9 @@ float yPos;
   characterIdleFlip = loadImage("characteridleflipped.png");
   characterIdleFlip.resize(150, 0);
   
-  idleCycle = new PImage[2];
   idleCycle[0] = character;
   idleCycle[1] = characterIdle;
   
-  idleCycleFlipped = new PImage[2];
   idleCycleFlipped[0] = characterFlip;
   idleCycleFlipped[1] = characterIdleFlip;
   
@@ -99,7 +97,6 @@ float yPos;
   moveEight = loadImage("charmoveeight.png");
   moveEight.resize(150, 0);
     
-  runCycle = new PImage[8];
   runCycle[0] = moveOne;
   runCycle[1] = moveTwo;
   runCycle[2] = moveThree;
@@ -133,7 +130,6 @@ float yPos;
   moveEightFlip = loadImage("charmoveeightflipped.png");
   moveEightFlip.resize(150, 0);
   
-  runCycleFlip = new PImage[8];
   runCycleFlip[0] = moveOneFlip;
   runCycleFlip[1] = moveTwoFlip;
   runCycleFlip[2] = moveThreeFlip;
@@ -167,7 +163,6 @@ float yPos;
   jumpEight = loadImage("jumpeight.png");
   jumpEight.resize(150, 0);
   
-  jumpCycle = new PImage[8];
   jumpCycle[0] = jumpOne;
   jumpCycle[1] = jumpTwo;
   jumpCycle[2] = jumpThree;
