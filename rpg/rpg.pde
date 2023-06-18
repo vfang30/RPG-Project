@@ -1,4 +1,6 @@
 PImage character;
+PImage characterIdle;
+double idle;
 
 PImage moveOne;
 PImage moveTwo;
@@ -18,6 +20,7 @@ double currentRun;
 int movementSpeed;
 
 Controller keyboardInput;
+PImage[] idleCycle;
 PImage[] runCycle;
 
 PImage[] location;
@@ -27,6 +30,15 @@ void setup() {
   
   character = loadImage("character.png");
   character.resize(100, 0);
+  
+  characterIdle = loadImage("characteridle.png");
+  characterIdle.resize(100, 0);
+  
+  idleCycle = new PImage[2];
+  idleCycle[0] = character;
+  idleCycle[1] = characterIdle;
+  
+  idle = 0;
   
   moveOne = loadImage("charmoveone.png");
   moveOne.resize(100, 0);
@@ -91,7 +103,13 @@ void keyReleased() {
 void draw() {
   background(255);
   image(areaOne, 0, 0);
-  image(character, xPos, yPos);
+  image(idleCycle[(int)idle], xPos, yPos);
+  
+  
+  idle += 0.03;
+  if ((int)idle > 1){
+  idle = 0;
+  }
   
   movement();
   
