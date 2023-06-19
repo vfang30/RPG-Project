@@ -5,7 +5,9 @@ class Combat{
   ArrayList<Fighter> enemies;
   int turn;
   float option;
+  float attackOption;
   boolean attack;
+  boolean top;
   
   public Combat(ArrayList<Fighter> party, ArrayList<Fighter> enemies){
     this.party = party;
@@ -14,7 +16,9 @@ class Combat{
     background.resize(1100, 900);
     turn = 1;
     option = 0;
+    attackOption = 0;
     attack = false;
+    top = true;
   }
   
   void run(){
@@ -23,6 +27,8 @@ class Combat{
     
     boolean left = keyboardInput.isPressed(Controller.MOVE_LEFT);
     boolean right = keyboardInput.isPressed(Controller.MOVE_RIGHT);
+    boolean up = keyboardInput.isPressed(Controller.JUMP);
+    boolean down = keyboardInput.isPressed(Controller.MOVE_DOWN);
     boolean ent = keyboardInput.isPressed(Controller.ENT);
     boolean cancel = keyboardInput.isPressed(Controller.CANCEL);
     
@@ -30,12 +36,28 @@ class Combat{
     attack = false;
     }
     
+    if (down){
+    top = false;
+    }
+    
+    if (up){
+    top = true;
+    }
+    
     if (left && option > 0){
       option -=0.09;
     }
     
+    if (left && attackOption > 0){
+      attackOption -=0.09;
+    }
+    
     if (right && option < 2){
       option +=0.09;
+    }
+    
+    if (right && attackOption < 1){
+      attackOption +=0.09;
     }
     
     if (ent && (int)option == 0){
@@ -115,12 +137,34 @@ class Combat{
      fill(0);
      rect(0, 650, 1100, 250);
      
+     if ((int)attackOption == 0 && top){
+       fill(30);
+     }else{
      fill(128);
+     }
      rect(110, 690, 400, 80); 
+     
+     if ((int)attackOption == 1 && top){
+       fill(30);
+     }else{
+     fill(128);
+     }
      rect(590, 690, 400, 80); 
      
+     if ((int)attackOption == 0 && !top){
+       fill(30);
+     }else{
+     fill(128);
+     }
      rect(110, 810, 400, 80); 
+     
+     if ((int)attackOption == 1 && !top){
+       fill(30);
+     }else{
+     fill(128);
+     }
      rect(590, 810, 400, 80); 
+   
      
      textSize(40);
      fill(255);
