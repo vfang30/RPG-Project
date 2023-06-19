@@ -4,7 +4,7 @@ class Combat{
   ArrayList<Fighter> party;
   ArrayList<Fighter> enemies;
   int turn;
-  int option;
+  float option;
   
   public Combat(ArrayList<Fighter> party, ArrayList<Fighter> enemies){
     this.party = party;
@@ -21,11 +21,11 @@ class Combat{
     boolean right = keyboardInput.isPressed(Controller.MOVE_RIGHT);
     
     if (left && option > 0){
-      option -=1;
+      option -=0.13;
     }
     
     if (right && option < 2){
-      option +=1;
+      option +=0.13;
     }
     
     
@@ -54,21 +54,21 @@ class Combat{
      
      textSize(40);
      
-     if (option == 0){
+     if ((int)option == 0){
        fill(30);
      }else{
      fill(128);
      }
      rect(0, 600, 220, 50);
      
-     if (option == 1){
+     if ((int)option == 1){
        fill(30);
      }else{
      fill(128);
      }
      rect(440, 600, 220, 50);
      
-     if (option == 2){
+     if ((int)option == 2){
        fill(30);
      }else{
      fill(128);
