@@ -3,7 +3,7 @@ abstract class Fighter{
   private String name;
   private int hp, maxHP;
   private int atk;
-  private int mana;
+  private int mana, maxMana;
   private int xp;
   private int level;
   private PImage avatar;
@@ -16,6 +16,7 @@ abstract class Fighter{
     maxHP = hp;
     this.hp = hp;
     this.atk = atk;
+    maxMana = mana;
     this.mana = mana;
     this.xp = 0;
     this.level = 1;
@@ -45,6 +46,10 @@ abstract class Fighter{
     return mana;
   }
   
+  public int getMaxMana(){
+    return maxMana;
+  }
+  
   public int getXP(){
     return xp;
   }
@@ -60,6 +65,10 @@ abstract class Fighter{
   
   public void setAtk(int attack){
     atk = attack;
+  }
+  
+  public void setMana(int m){
+    mana = m;
   }
   
   public void setXP(int exp){
