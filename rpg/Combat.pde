@@ -31,13 +31,15 @@ class Combat{
    void drawInfo(){
      fill(0);
      rect(0, 650, 1100, 250);
-     fill(255);
      textSize(30);
+     
      for (int i = 0; i < party.size(); i +=1){
        fill(255);
        rect((i * 300) + 140, 800, 150, 50);
+       
        fill(255, 0, 0);
        rect((i * 300) + 140, 800, (float)party.get(i).getHP()/party.get(i).getMaxHP() * 150, 50);
+      
        text(party.get(i).getName(), (i * 300) + 200, 730);
        text(party.get(i).getHP() + " / " + party.get(i).getMaxHP(), (i * 300) + 300, 830);
      }
