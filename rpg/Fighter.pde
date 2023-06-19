@@ -54,8 +54,12 @@ abstract class Fighter{
     return xp;
   }
   
-  public int level(){
+  public int getlevel(){
     return level;
+  }
+  
+  public PImage getPortrait(){
+    return portrait;
   }
 
   //set methods

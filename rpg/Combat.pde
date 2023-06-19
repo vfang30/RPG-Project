@@ -219,7 +219,7 @@ class Combat{
        rect(750, (i * 70) + 700, (float)party.get(i).getMana()/party.get(i).getMaxMana() * 230, 35);
        
        //Portrait
-       PImage portrait = party.get(i).portrait;
+       PImage portrait = party.get(i).getPortrait().copy();
        portrait.resize(55, 0);
        image(portrait, 100, (i * 70) + 690);
        
@@ -256,7 +256,7 @@ class Combat{
        text(party.get(i).getMana() + " / " + party.get(i).getMaxMana() + " MANA" , (i * 300) + 210, 830);
       
         //Portrait
-       image(party.get(i).portrait, (i * 300) + 80, 730);
+       image(party.get(i).getPortrait(), (i * 300) + 80, 730);
        
        //Name
        fill(255);
