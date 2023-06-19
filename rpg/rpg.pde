@@ -28,15 +28,15 @@ void keyReleased() {
 
 
 void setup() {
-  size(1100, 700);
+  size(1100, 900);
   
   idle = 0;
   
   areaOne = loadImage("areaone.png");
-  areaOne.resize(1100, 700);
+  areaOne.resize(1100, 900);
   
   areaZero = loadImage("areazero.png");
-  areaZero.resize(1100, 700);
+  areaZero.resize(1100, 900);
 
   
   movementSpeed = 7;
@@ -71,7 +71,7 @@ void draw() {
   }
   
   //fall
-  if (!jump && player.yPos < 490){
+  if (!jump && player.yPos < 690){
     //reset upward velocity and jump cycle in preparation for next jump
     velocityUp = 20;
     currentJump = 0;
