@@ -214,6 +214,15 @@ class Combat{
        fill(0, 0, 255);
        rect(750, (i * 70) + 700, (float)party.get(i).getMana()/party.get(i).getMaxMana() * 230, 35);
        
+       //Portrait
+       PImage portrait = party.get(i).portrait;
+       portrait.resize(55, 0);
+       image(portrait, 100, (i * 70) + 690);
+       
+       fill(255);
+       textSize(35);
+       text(party.get(i).getName(), 220, (i * 70) + 730);
+       
      }
    }
    
