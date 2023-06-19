@@ -1,5 +1,7 @@
 PFont font;
 
+boolean fight;
+
 double idle;
 float gravity = .8;
 float speed = 0;
@@ -60,6 +62,7 @@ void setup() {
   currentJump = 1;
   
   //TESTING CODE
+  fight = false;
   Vishu one = new Vishu();
   Vishu two = new Vishu();
   Vishu three = new Vishu();
@@ -75,32 +78,39 @@ void setup() {
 
 }
 
+void mouseClicked(){
+fight = !fight;
+}
+
 void draw() {
   background(255);
   image(areaZero, 0, 0);
   
+  if (fight){
   testing.run();
+  }else{
   
-  //playerDraw();
-  //movement();
+  playerDraw();
+  movement();
   
-  //if (jump && velocity > 0){
-  //  speed = 0;
-  //  velocity = velocity - gravity;
-  //  player.yPos = player.yPos - velocity;
-  //  loadBackground();
-  //    playerDraw();
-  //  if (player.yPos < 480){
-  //    jump = false;
-  //  }
-  //}
+  if (jump && velocity > 0){
+    speed = 0;
+    velocity = velocity - gravity;
+    player.yPos = player.yPos - velocity;
+    loadBackground();
+      playerDraw();
+    if (player.yPos < 480){
+      jump = false;
+    }
+  }
   
-  //if (!jump && player.yPos < 690){
-  //  velocity = 20;
-  //  currentJump = 0;
-  //  speed = speed + gravity;
-  //  player.yPos = player.yPos + speed;
-  //}
+  if (!jump && player.yPos < 690){
+    velocity = 20;
+    currentJump = 0;
+    speed = speed + gravity;
+    player.yPos = player.yPos + speed;
+  }
+  }
   
   idle += 0.03;
   if ((int)idle > 1){
