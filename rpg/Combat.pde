@@ -66,6 +66,10 @@ class Combat{
         item = false;
         menu = true;
       }
+      if (target){
+        target = false;
+        attack = true;
+      }
     }
   }
   
