@@ -2,6 +2,7 @@ class Controller {
   static final int MOVE_LEFT = 0;
   static final int MOVE_RIGHT = 1;
   static final int JUMP = 2;
+  static final int ENT = 3;
   boolean [] inputs;
 
   public Controller() {
@@ -21,6 +22,9 @@ class Controller {
       inputs[MOVE_RIGHT] = true;
     if(code == 'W')
       inputs[JUMP] = true;
+    if(code == ENTER){
+      inputs[ENT] = true;
+    }
   }
   
   void release(int code) {
@@ -30,9 +34,13 @@ class Controller {
     if(code == 'D')
     inputs[MOVE_RIGHT] = false;
     
-    if (code == 'W'  && player.yPos >= 490){
+    if(code == 'W'  && player.yPos >= 490){
     inputs[JUMP] = false;
     jump = true;
+    }
+    
+    if(code == ENTER){
+    inputs[ENT] = false;
     }
   }
 }

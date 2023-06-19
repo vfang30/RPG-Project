@@ -5,6 +5,7 @@ class Combat{
   ArrayList<Fighter> enemies;
   int turn;
   float option;
+  boolean attack;
   
   public Combat(ArrayList<Fighter> party, ArrayList<Fighter> enemies){
     this.party = party;
@@ -13,25 +14,49 @@ class Combat{
     background.resize(1100, 900);
     turn = 1;
     option = 0;
+    attack = false;
   }
   
   void run(){
     
+    image(background, 0, 0);
+    
     boolean left = keyboardInput.isPressed(Controller.MOVE_LEFT);
     boolean right = keyboardInput.isPressed(Controller.MOVE_RIGHT);
+    boolean ent = keyboardInput.isPressed(Controller.ENT);
     
     if (left && option > 0){
-      option -=0.13;
+      option -=0.09;
     }
     
     if (right && option < 2){
-      option +=0.13;
+      option +=0.09;
     }
     
+    if (ent && (int)option == 0){
+      attack = true;
+    }
     
-    image(background, 0, 0);
-    drawInfo();
-    drawOptions();
+    if (attack){
+     drawAttacks();
+    }
+    
+    if (ent && (int)option == 1){
+      println("items");
+    }
+    
+    if (ent && (int)option == 2){
+      println("run");
+    }
+    
+
+    
+    if (!attack){
+      drawInfo();
+      drawOptions();
+    }
+    
+   
     for (int i = 0; i < party.size(); i +=1){
       image(party.get(i).idleCycle[(int)idle], 100, (i * 150) + 70);
     }
@@ -81,6 +106,21 @@ class Combat{
      text("RUN", 940, 640);
    }
    
+   void drawAttacks(){
+     fill(0);
+     rect(0, 650, 1100, 250);
+     
+     fill(128);
+     rect(110, 690, 400, 80); 
+     rect(590, 690, 400, 80); 
+     
+     rect(110, 810, 400, 80); 
+     rect(590, 810, 400, 80); 
+     
+     fill(255);
+     
+       
+   }
    
    void drawInfo(){
      fill(0);
