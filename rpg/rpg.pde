@@ -1,3 +1,9 @@
+/* Right now the character will stop falling once they fall below a certain y coord but this is gonna have to be changed in the future
+if we ever add any platforming/anything that would require jumping -Victor */ 
+
+
+
+
 double idle; //idle state 
 float gravity = .8; 
 float velocityDown = 0; 
