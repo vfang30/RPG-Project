@@ -55,6 +55,7 @@ void setup() {
   //TESTING CODE
   fight = false;
   Vishu one = new Vishu();
+  one.setHP(10);
   Vishu two = new Vishu();
   Vishu three = new Vishu();
   ArrayList<Fighter> party = new ArrayList<Fighter>();

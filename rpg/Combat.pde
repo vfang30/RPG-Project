@@ -25,7 +25,7 @@ class Combat{
     this.enemies = enemies;
     
     background = loadImage("battlebackground.png");
-    background.resize(1100, 900);
+    background.resize(1200, 900);
     turn = 1;
     
     battleInfo = loadImage("battleinfo.png");
@@ -294,14 +294,16 @@ class Combat{
        //rect((i * 340) + 180, 850, (float)party.get(i).getHP()/party.get(i).getMaxHP() * 170, 25);
               
        //text(party.get(i).getMana() + " / " + party.get(i).getMaxMana() + " MANA" , (i * 340) + 190, 830);
+       healthBar.resize((int)((float)party.get(i).getHP()/party.get(i).getMaxHP() * 191) , 9);
+       image(healthBar, (i * 400) + 181, 752);
       
        // //Portrait
-       //image(party.get(i).getPortrait(), (i * 340) + 30, 730);
+       image(party.get(i).getPortrait(), (i * 400) + 30, 685);
        
        ////Name
-       //fill(255);
-       //textSize(40);
-       //text(party.get(i).getName(), (i * 340) + 190, 710);
+       fill(255);
+       textSize(40);
+       text(party.get(i).getName(), (i * 400) + 190, 710);
 
      }
    }
