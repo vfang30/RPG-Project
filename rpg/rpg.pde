@@ -63,8 +63,12 @@ void setup() {
   party.add(three);
   
   Vishu four = new Vishu();
+  Vishu five = new Vishu();
+  Vishu six = new Vishu();
   ArrayList<Fighter> enemies = new ArrayList<Fighter>();
   enemies.add(four);
+  enemies.add(five);
+  enemies.add(six);
   testing = new Combat(party, enemies);
 }
 

@@ -200,8 +200,19 @@ class Combat{
      
      for (int i = 0; i < targets.size(); i +=1){
        
+       //Health
        fill(255);
-       rect(100, (i * 200) + 700, 300, 35);
+       rect(400, (i * 70) + 700, 300, 35);
+       
+       fill(0, 255, 0);
+       rect(400, (i * 70) + 700, (float)party.get(i).getHP()/party.get(i).getMaxHP() * 300, 35);
+       
+       //Mana
+       fill(255);
+       rect(750, (i * 70) + 700, 230, 35);
+       
+       fill(0, 0, 255);
+       rect(750, (i * 70) + 700, (float)party.get(i).getMana()/party.get(i).getMaxMana() * 230, 35);
        
      }
    }
