@@ -5,8 +5,7 @@ class Combat{
   ArrayList<Fighter> enemies;
   int turn;
   
-  float option;
-  float attackOption;
+  int option;
   
   boolean attack;
   boolean item;
@@ -23,7 +22,6 @@ class Combat{
     turn = 1;
     
     option = 0;
-    attackOption = 0;
     
     menu = true;
     attack = false;
@@ -49,6 +47,20 @@ class Combat{
         menu = false;
         attack = true;
       }
+      if (option == 1 && menu){
+        menu = false;
+        item = true;
+      }
+    }
+    if (keyCode == 'X'){
+      if (attack){
+        attack = false;
+        menu = true;
+      }
+      if (item){
+        item = false;
+        menu = true;
+      }
     }
   }
   
@@ -57,60 +69,9 @@ class Combat{
     
     image(background, 0, 0);
     
-    boolean ent = keyboardInput.isPressed(Controller.ENT);
-    boolean cancel = keyboardInput.isPressed(Controller.CANCEL);
-    
-    if (menu){
-      if (option > 2){
-        option = 2;
-      }
-      if (option < 0){
-        option = 0;
-      }
-    }
-    
-    if (attack){
-      if (option > 1){
-        option = 1;
-      }
-      if (option < 0){
-        option = 0;
-      }
-    }
-    
-    if (cancel){
-      if (attack)
-        attack = false;
-      if (item)
-        item = false;
-    }
-    
-    
-    if (ent && (int)option == 1 && menu){
-      item = true;
-      menu = false;
-    }
-    
-    if (attack){
-     drawAttacks();
-    }
-    
-    if (item){
-      drawItems();
-    }
-    
-    if (ent && (int)option == 2 && menu){
-      println("run");
-    }
-    
+    optionHover();
+    drawMenu();
 
-    
-    if (!attack && !item){
-      drawInfo();
-      drawOptions();
-    }
-    
-   
     for (int i = 0; i < party.size(); i +=1){
       image(party.get(i).idleCycle[(int)idle], 100, (i * 150) + 70);
     }
@@ -129,25 +90,40 @@ class Combat{
      return minOneAlive;
    }
    
+   void drawMenu(){
+    if (attack){
+     drawAttacks();
+    }
+    
+    if (item){
+      drawItems();
+    }
+        
+    if (menu){
+      drawInfo();
+      drawOptions();
+    }
+   }
+   
    void drawOptions(){
      
      textSize(40);
      
-     if ((int)option == 0){
+     if (option == 0){
        fill(30);
      }else{
      fill(128);
      }
      rect(0, 600, 220, 50);
      
-     if ((int)option == 1){
+     if (option == 1){
        fill(30);
      }else{
      fill(128);
      }
      rect(440, 600, 220, 50);
      
-     if ((int)option == 2){
+     if (option == 2){
        fill(30);
      }else{
      fill(128);
@@ -164,28 +140,28 @@ class Combat{
      fill(0);
      rect(0, 650, 1100, 250);
      
-     if ((int)option == 0 && top){
+     if (option == 0 && top){
        fill(30);
      }else{
      fill(128);
      }
      rect(110, 690, 400, 80); 
      
-     if ((int)option == 1 && top){
+     if (option == 1 && top){
        fill(30);
      }else{
      fill(128);
      }
      rect(590, 690, 400, 80); 
      
-     if ((int)option == 0 && !top){
+     if (option == 0 && !top){
        fill(30);
      }else{
      fill(128);
      }
      rect(110, 810, 400, 80); 
      
-     if ((int)option == 1 && !top){
+     if (option == 1 && !top){
        fill(30);
      }else{
      fill(128);
@@ -243,5 +219,25 @@ class Combat{
      }
    }
   
+   void optionHover(){
+     if (menu){
+      if (option > 2){
+        option = 2;
+      }
+      if (option < 0){
+        option = 0;
+      }
+    }
+    
+    if (attack){
+      if (option > 1){
+        option = 1;
+      }
+      if (option < 0){
+        option = 0;
+      }
+    }
+   
+   }
   
 }
