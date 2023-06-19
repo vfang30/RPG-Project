@@ -1,3 +1,5 @@
+PFont font;
+
 double idle;
 float gravity = .8;
 float speed = 0;
@@ -32,6 +34,9 @@ void keyReleased() {
 
 void setup() {
   size(1100, 900);
+  
+  font = createFont("AlternityBold-YWl4.ttf", 128);
+  textFont(font);
   
   idle = 0;
   
