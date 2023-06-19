@@ -3,15 +3,16 @@ class Combat{
   PImage background;
   ArrayList<Fighter> party;
   ArrayList<Fighter> enemies;
-  int turn;
   
+  int turn;
   int option;
   
-  boolean attack;
-  boolean item;
   boolean top;
-  
   boolean menu;
+    boolean attack;
+      boolean target;
+    boolean item;
+
   
   public Combat(ArrayList<Fighter> party, ArrayList<Fighter> enemies){
     this.party = party;
@@ -23,10 +24,11 @@ class Combat{
     
     option = 0;
     
-    menu = true;
-    attack = false;
-    item = false;
     top = true;
+    menu = true;
+      attack = false;
+        target = false;
+      item = false;
   }
   
   void keyPressedCombat(){
@@ -43,14 +45,17 @@ class Combat{
       option +=1;
     }
     if (keyCode == ENTER){
+      
       if (option == 0 && menu){
-        menu = false;
-        attack = true;
-      }
-      if (option == 1 && menu){
-        menu = false;
-        item = true;
-      }
+      menu = false;
+      attack = true;
+      }else if (option == 1 && menu) {
+      menu = false;
+      item = true;
+      }else if (attack) {
+      attack = false;
+      target = true;
+      }      
     }
     if (keyCode == 'X'){
       if (attack){
@@ -91,18 +96,24 @@ class Combat{
    }
    
    void drawMenu(){
-    if (attack){
-     drawAttacks();
-    }
-    
-    if (item){
-      drawItems();
-    }
-        
+     
     if (menu){
       drawInfo();
       drawOptions();
     }
+     
+      if (attack){
+       drawAttacks();
+      }
+      
+        if (target){
+          drawTargets(enemies);
+        }
+    
+      if (item){
+        drawItems();
+      }
+        
    }
    
    void drawOptions(){
@@ -181,6 +192,18 @@ class Combat{
    void drawItems(){
      fill(0);
      rect(0, 650, 1100, 250);
+   }
+   
+   void drawTargets(ArrayList<Fighter> targets){
+     fill(0);
+     rect(0, 650, 1100, 250);
+     
+     for (int i = 0; i < targets.size(); i +=1){
+       
+       fill(255);
+       rect(100, (i * 200) + 700, 300, 35);
+       
+     }
    }
    
    void drawInfo(){
