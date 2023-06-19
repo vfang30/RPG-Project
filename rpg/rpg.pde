@@ -57,29 +57,7 @@ void draw() {
   
   playerDraw();
   movement();
-  
-  //while in jump player goes up by velocity (velocity pulled down by gravity)
-  if (jump){
-    velocityDown = 0;
-    velocityUp = velocityUp - gravity;
-    player.yPos = player.yPos - velocityUp;
-
-    if (velocityUp <= 0){ //stop jump state when velocity stops
-      jump = false;
-    }
-    
-  }
-  
-  //fall down
-  if (!jump && player.yPos < 690){
-    //reset upward velocity and jump cycle in preparation for next jump
-    velocityUp = 20;
-    currentJump = 0;
-    
-    //go down
-    velocityDown = velocityDown + gravity;
-    player.yPos = player.yPos + velocityDown;
-  }
+  gravity();
   
   //update the idle stance
   idle += 0.03;
@@ -109,6 +87,32 @@ void playerDraw(){
   image(player.idleCycleFlipped[(int)idle], player.xPos, player.yPos);
   }
   
+}
+
+void gravity(){
+  
+  //while in jump player goes up by velocity (velocity pulled down by gravity)
+  if (jump){
+    velocityDown = 0;
+    velocityUp = velocityUp - gravity;
+    player.yPos = player.yPos - velocityUp;
+
+    if (velocityUp <= 0){ //stop jump state when velocity stops
+      jump = false;
+    }
+    
+  }
+  
+  //fall down
+  if (!jump && player.yPos < 690){
+    //reset upward velocity and jump cycle in preparation for next jump
+    velocityUp = 20;
+    currentJump = 0;
+    
+    //go down
+    velocityDown = velocityDown + gravity;
+    player.yPos = player.yPos + velocityDown;
+  }
 }
 
 void jump(){
