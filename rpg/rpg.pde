@@ -75,7 +75,6 @@ void setup() {
   ArrayList<Fighter> enemies = new ArrayList<Fighter>();
   enemies.add(four);
   testing = new Combat(party, enemies);
-
 }
 
 void mouseClicked(){
