@@ -24,6 +24,11 @@ class Combat{
     boolean left = keyboardInput.isPressed(Controller.MOVE_LEFT);
     boolean right = keyboardInput.isPressed(Controller.MOVE_RIGHT);
     boolean ent = keyboardInput.isPressed(Controller.ENT);
+    boolean cancel = keyboardInput.isPressed(Controller.CANCEL);
+    
+    if (cancel){
+    attack = false;
+    }
     
     if (left && option > 0){
       option -=0.09;
@@ -117,9 +122,13 @@ class Combat{
      rect(110, 810, 400, 80); 
      rect(590, 810, 400, 80); 
      
+     textSize(40);
      fill(255);
      
-       
+     text("Move1", 255, 745);
+     text("Move2", 725, 745);  
+     text("Move3", 255, 865);
+     text("Move4", 725, 865);
    }
    
    void drawInfo(){

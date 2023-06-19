@@ -3,10 +3,11 @@ class Controller {
   static final int MOVE_RIGHT = 1;
   static final int JUMP = 2;
   static final int ENT = 3;
+  static final int  CANCEL = 4;
   boolean [] inputs;
 
   public Controller() {
-    inputs = new boolean[5];
+    inputs = new boolean[6];
   }
 
   /**@param code: a valid constant e.g. P1_LEFT
@@ -22,17 +23,20 @@ class Controller {
       inputs[MOVE_RIGHT] = true;
     if(code == 'W')
       inputs[JUMP] = true;
-    if(code == ENTER){
+    if(code == ENTER)
       inputs[ENT] = true;
-    }
+    if(code == 'X')
+      inputs[CANCEL] = true;
   }
   
   void release(int code) {
-    if(code == 'A')
+    if(code == 'A'){
     inputs[MOVE_LEFT] = false;
+    }
     
-    if(code == 'D')
+    if(code == 'D'){
     inputs[MOVE_RIGHT] = false;
+    }
     
     if(code == 'W'  && player.yPos >= 490){
     inputs[JUMP] = false;
@@ -42,5 +46,10 @@ class Controller {
     if(code == ENTER){
     inputs[ENT] = false;
     }
+    
+    if(code == 'X'){
+    inputs[CANCEL] = false;
+    }
+    
   }
 }
