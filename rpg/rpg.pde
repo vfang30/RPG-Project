@@ -16,7 +16,7 @@ Player player;
 
 Controller keyboardInput;
 
-PImage[] location; //plan to use this to store diffeentt locations in the game
+PImage[] location; //plan to use this to store diffeent locations in the game
 
 void keyPressed() {
   keyboardInput.press(keyCode);
@@ -70,7 +70,7 @@ void draw() {
     
   }
   
-  //fall
+  //fall down
   if (!jump && player.yPos < 690){
     //reset upward velocity and jump cycle in preparation for next jump
     velocityUp = 20;
