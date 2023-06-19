@@ -25,15 +25,6 @@ PImage[] location;
 
 Combat testing;
 
-void keyPressed() {
-  keyboardInput.press(keyCode);
-}
-
-void keyReleased() {
-  keyboardInput.release(keyCode);
-}
-
-
 void setup() {
   size(1100, 900);
   
@@ -75,6 +66,19 @@ void setup() {
   ArrayList<Fighter> enemies = new ArrayList<Fighter>();
   enemies.add(four);
   testing = new Combat(party, enemies);
+}
+
+void keyPressed() {
+  if (!fight){
+    keyboardInput.press(keyCode);
+  }
+  if (fight){
+    testing.keyPressedCombat();
+  }
+}
+
+void keyReleased() {
+  keyboardInput.release(keyCode);
 }
 
 void mouseClicked(){

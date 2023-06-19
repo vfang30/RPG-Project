@@ -31,6 +31,16 @@ class Combat{
     top = true;
   }
   
+  void keyPressedCombat(){
+    if (keyCode == 'W'){
+      top = true;
+    }
+    if (keyCode == 'S'){
+      top = false;
+    }
+  }
+  
+  
   void run(){
     
     image(background, 0, 0);
