@@ -1,5 +1,6 @@
 import java.util.*;
 class Combat{
+  
   PImage background;
   ArrayList<Fighter> party;
   ArrayList<Fighter> enemies;
@@ -11,6 +12,7 @@ class Combat{
   boolean menu;
     boolean attack;
       boolean target;
+      int targetTeamSize;
     boolean item;
 
   
@@ -34,14 +36,20 @@ class Combat{
   void keyPressedCombat(){
     if (keyCode == 'W'){
       top = true;
+      if (target){
+      option -=1;
+      }
     }
     if (keyCode == 'S'){
       top = false;
+      if (target){
+      option +=1;
+      }
     }
-    if (keyCode == 'A'){
+    if (keyCode == 'A' && !target){
       option -=1;
     }
-    if (keyCode == 'D'){
+    if (keyCode == 'D' && !target){
       option +=1;
     }
     if (keyCode == ENTER){
@@ -58,6 +66,7 @@ class Combat{
       optionReset();
       attack = false;
       target = true;
+      targetTeamSize = enemies.size();
       }      
     }
     if (keyCode == 'X'){
@@ -206,32 +215,47 @@ class Combat{
    
    void drawTargets(ArrayList<Fighter> targets){
      fill(0);
-     rect(0, 650, 1100, 250);
+     rect(0, 660, 1100, 250);
+     
+       //Option Highlighter
+       noStroke();
+       fill(255, 207, 64);
+       //Top Rectangle
+       rect(0, 660 + (option * 70), 1100, 10);
+       
+       //Left Rectangle
+       rect(0, 660 + (option * 70), 10, 70);
+       
+       //Right Rectangle
+       rect(1090, 660 + (option * 70), 10, 70);
+       
+       //Bottom Rectangle
+       rect(0, 730 + (option * 70), 1100, 10);
      
      for (int i = 0; i < targets.size(); i +=1){
        
        //Health
        fill(255);
-       rect(400, (i * 70) + 700, 300, 35);
+       rect(400, (i * 70) + 680, 300, 35);
        
        fill(0, 255, 0);
-       rect(400, (i * 70) + 700, (float)party.get(i).getHP()/party.get(i).getMaxHP() * 300, 35);
+       rect(400, (i * 70) + 680, (float)party.get(i).getHP()/party.get(i).getMaxHP() * 300, 35);
        
        //Mana
        fill(255);
-       rect(750, (i * 70) + 700, 230, 35);
+       rect(750, (i * 70) + 680, 230, 35);
        
        fill(0, 0, 255);
-       rect(750, (i * 70) + 700, (float)party.get(i).getMana()/party.get(i).getMaxMana() * 230, 35);
+       rect(750, (i * 70) + 680, (float)party.get(i).getMana()/party.get(i).getMaxMana() * 230, 35);
        
        //Portrait
        PImage portrait = party.get(i).getPortrait().copy();
        portrait.resize(55, 0);
-       image(portrait, 100, (i * 70) + 690);
+       image(portrait, 100, (i * 70) + 670);
        
        fill(255);
        textSize(35);
-       text(party.get(i).getName(), 220, (i * 70) + 730);
+       text(party.get(i).getName(), 220, (i * 70) + 710);
        
      }
    }
@@ -288,6 +312,15 @@ class Combat{
       }
       if (option < 0){
         option = 0;
+      }
+    }
+    
+    if (target){
+      if (option > targetTeamSize - 1){
+      option = targetTeamSize - 1;
+      }
+      if (option < 0){
+      option = 0;
       }
     }
    
