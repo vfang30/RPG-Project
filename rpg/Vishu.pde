@@ -9,6 +9,7 @@ class Vishu extends Fighter{
     
     super.idleCycle[0] = super.avatar;
     super.idleCycle[1] = super.avatarIdle;
+
   }
   
   public String attack(Fighter other){
