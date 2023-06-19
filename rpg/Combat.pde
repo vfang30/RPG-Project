@@ -38,6 +38,12 @@ class Combat{
     if (keyCode == 'S'){
       top = false;
     }
+    if (keyCode == 'A'){
+      option -=1;
+    }
+    if (keyCode == 'D'){
+      option +=1;
+    }
   }
   
   
@@ -51,6 +57,15 @@ class Combat{
     boolean down = keyboardInput.isPressed(Controller.MOVE_DOWN);
     boolean ent = keyboardInput.isPressed(Controller.ENT);
     boolean cancel = keyboardInput.isPressed(Controller.CANCEL);
+    
+    if (menu){
+      if (option > 2){
+        option = 2;
+      }
+      if (option < 0){
+        option = 0;
+      }
+    }
     
     if (cancel){
       if (attack)
@@ -67,17 +82,11 @@ class Combat{
     top = true;
     }
     
-    if (left && option > 0){
-      option -=0.09;
-    }
     
     if (left && attackOption > 0){
       attackOption -=0.09;
     }
     
-    if (right && option < 2){
-      option +=0.09;
-    }
     
     if (right && attackOption < 1){
       attackOption +=0.09;
