@@ -3,9 +3,7 @@ class Vishu extends Fighter{
   public Vishu(){
     super("Vishu", 20, 5, 20);
     super.avatar = loadImage("idle/normal/"+"character.png");
-    super.avatar.resize(150, 0);
     super.avatarIdle = loadImage("idle/normal/"+"characteridle.png");
-    super.avatarIdle.resize(150, 0);
     super.portrait = loadImage("Vishuportrait.png");
     
     super.idleCycle[0] = super.avatar;

@@ -28,7 +28,7 @@ Combat testing;
 void setup() {
   size(1200, 900);
   
-  font = createFont("AlternityBold-YWl4.ttf", 128);
+  font = createFont("FFFFORWA.TTF", 128);
   textFont(font);
   
   idle = 0;
@@ -56,6 +56,7 @@ void setup() {
   fight = false;
   Vishu one = new Vishu();
   one.setHP(10);
+  one.setMana(14);
   Vishu two = new Vishu();
   Vishu three = new Vishu();
   ArrayList<Fighter> party = new ArrayList<Fighter>();
@@ -107,12 +108,12 @@ void draw() {
     player.yPos = player.yPos - velocity;
     loadBackground();
       playerDraw();
-    if (player.yPos < 480){
+    if (player.yPos < 440){
       jump = false;
     }
   }
   
-  if (!jump && player.yPos < 690){
+  if (!jump && player.yPos < 650){
     velocity = 20;
     currentJump = 0;
     speed = speed + gravity;

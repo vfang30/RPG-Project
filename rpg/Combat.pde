@@ -145,7 +145,7 @@ class Combat{
    
    void drawOptions(){
      
-     textSize(40);
+     textSize(25);
      
      if (option == 0){
        fill(30);
@@ -247,14 +247,14 @@ class Combat{
        rect(400, (i * 70) + 680, 300, 35);
        
        fill(0, 255, 0);
-       rect(400, (i * 70) + 680, (float)party.get(i).getHP()/party.get(i).getMaxHP() * 300, 35);
+       rect(400, (i * 70) + 680, (float)targets.get(i).getHP()/targets.get(i).getMaxHP() * 300, 35);
        
        //Mana
        fill(255);
        rect(750, (i * 70) + 680, 230, 35);
        
        fill(0, 0, 255);
-       rect(750, (i * 70) + 680, (float)party.get(i).getMana()/party.get(i).getMaxMana() * 230, 35);
+       rect(750, (i * 70) + 680, (float)targets.get(i).getMana()/targets.get(i).getMaxMana() * 230, 35);
        
        //Portrait
        PImage portrait = party.get(i).getPortrait().copy();
@@ -269,40 +269,31 @@ class Combat{
    }
    
    void drawInfo(){
-     //fill(0);
-     //rect(0, 650, 1100, 250);
      
      image(battleInfo, 0, 650);
      
      for (int i = 0; i < party.size(); i +=1){
       
        ////Health
-       //fill(255);
-       //rect((i * 340) + 180, 770, 170, 25);
-       
-       //fill(0, 255, 0);
-       //rect((i * 340) + 180, 770, (float)party.get(i).getHP()/party.get(i).getMaxHP() * 170, 25);
-       
-       //textSize(18);
-       //text(party.get(i).getHP() + " / " + party.get(i).getMaxHP() + " HP" , (i * 340) + 190, 750);
-       
-       ////Mana
-       //fill(255);
-       //rect((i * 340) + 180, 850, 170, 25);
-       
-       //fill(0, 0, 255);
-       //rect((i * 340) + 180, 850, (float)party.get(i).getHP()/party.get(i).getMaxHP() * 170, 25);
-              
-       //text(party.get(i).getMana() + " / " + party.get(i).getMaxMana() + " MANA" , (i * 340) + 190, 830);
        healthBar.resize((int)((float)party.get(i).getHP()/party.get(i).getMaxHP() * 191) , 9);
        image(healthBar, (i * 400) + 181, 752);
+       
+       textSize(15);
+       text(party.get(i).getHP() + " / " + party.get(i).getMaxHP() + " HP" , (i * 400) + 190, 790);
+       
+       ////Mana
+       manaBar.resize((int)((float)party.get(i).getMana()/party.get(i).getMaxMana() * 191) , 9);
+       image(manaBar, (i * 400) + 181, 802);
+       
+       textSize(15);
+       text(party.get(i).getMana() + " / " + party.get(i).getMaxMana() + " MANA" , (i * 400) + 190, 840);
       
        // //Portrait
        image(party.get(i).getPortrait(), (i * 400) + 30, 685);
        
        ////Name
        fill(255);
-       textSize(40);
+       textSize(25);
        text(party.get(i).getName(), (i * 400) + 190, 710);
 
      }

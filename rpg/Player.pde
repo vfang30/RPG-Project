@@ -39,13 +39,12 @@ int direction;
 
   public Player(){
   xPos = 450;
-  yPos = 690;
+  yPos = 650;
   direction = EAST;
  
   //normal idle sprites
   for (int i = 0; i < 2; i +=1){
     PImage image = loadImage("idle/normal/"+idle[i]);
-    image.resize(150, 0);
     idleCycle[i] = image;
   }
   
