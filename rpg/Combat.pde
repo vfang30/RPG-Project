@@ -2,6 +2,10 @@ import java.util.*;
 class Combat{
   
   PImage background;
+  PImage battleInfo;
+  PImage healthBar;
+  PImage manaBar;
+  
   ArrayList<Fighter> party;
   ArrayList<Fighter> enemies;
   
@@ -23,6 +27,10 @@ class Combat{
     background = loadImage("battlebackground.png");
     background.resize(1100, 900);
     turn = 1;
+    
+    battleInfo = loadImage("battleinfo.png");
+    healthBar = loadImage("healthbar.png");
+    manaBar = loadImage("manabar.png");
     
     option = 0;
     
@@ -261,37 +269,39 @@ class Combat{
    }
    
    void drawInfo(){
-     fill(0);
-     rect(0, 650, 1100, 250);
+     //fill(0);
+     //rect(0, 650, 1100, 250);
+     
+     image(battleInfo, 0, 650);
      
      for (int i = 0; i < party.size(); i +=1){
       
-       //Health
-       fill(255);
-       rect((i * 300) + 200, 770, 170, 25);
+       ////Health
+       //fill(255);
+       //rect((i * 340) + 180, 770, 170, 25);
        
-       fill(0, 255, 0);
-       rect((i * 300) + 200, 770, (float)party.get(i).getHP()/party.get(i).getMaxHP() * 170, 25);
+       //fill(0, 255, 0);
+       //rect((i * 340) + 180, 770, (float)party.get(i).getHP()/party.get(i).getMaxHP() * 170, 25);
        
-       textSize(20);
-       text(party.get(i).getHP() + " / " + party.get(i).getMaxHP() + " HP" , (i * 300) + 210, 750);
+       //textSize(18);
+       //text(party.get(i).getHP() + " / " + party.get(i).getMaxHP() + " HP" , (i * 340) + 190, 750);
        
-       //Mana
-       fill(255);
-       rect((i * 300) + 200, 850, 170, 25);
+       ////Mana
+       //fill(255);
+       //rect((i * 340) + 180, 850, 170, 25);
        
-       fill(0, 0, 255);
-       rect((i * 300) + 200, 850, (float)party.get(i).getHP()/party.get(i).getMaxHP() * 170, 25);
+       //fill(0, 0, 255);
+       //rect((i * 340) + 180, 850, (float)party.get(i).getHP()/party.get(i).getMaxHP() * 170, 25);
               
-       text(party.get(i).getMana() + " / " + party.get(i).getMaxMana() + " MANA" , (i * 300) + 210, 830);
+       //text(party.get(i).getMana() + " / " + party.get(i).getMaxMana() + " MANA" , (i * 340) + 190, 830);
       
-        //Portrait
-       image(party.get(i).getPortrait(), (i * 300) + 80, 730);
+       // //Portrait
+       //image(party.get(i).getPortrait(), (i * 340) + 30, 730);
        
-       //Name
-       fill(255);
-       textSize(35);
-       text(party.get(i).getName(), (i * 300) + 230, 710);
+       ////Name
+       //fill(255);
+       //textSize(40);
+       //text(party.get(i).getName(), (i * 340) + 190, 710);
 
      }
    }

@@ -26,7 +26,7 @@ PImage[] location;
 Combat testing;
 
 void setup() {
-  size(1100, 900);
+  size(1200, 900);
   
   font = createFont("AlternityBold-YWl4.ttf", 128);
   textFont(font);
@@ -34,10 +34,10 @@ void setup() {
   idle = 0;
   
   areaOne = loadImage("areaone.png");
-  areaOne.resize(1100, 900);
+  areaOne.resize(1200, 900);
   
   areaZero = loadImage("areazero.png");
-  areaZero.resize(1100, 900);
+  areaZero.resize(1200, 900);
 
   
   location = new PImage[8];
