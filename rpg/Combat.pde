@@ -47,26 +47,32 @@ class Combat{
     if (keyCode == ENTER){
       
       if (option == 0 && menu){
+      optionReset();
       menu = false;
       attack = true;
       }else if (option == 1 && menu) {
+      optionReset();
       menu = false;
       item = true;
       }else if (attack) {
+      optionReset();
       attack = false;
       target = true;
       }      
     }
     if (keyCode == 'X'){
       if (attack){
+        optionReset();
         attack = false;
         menu = true;
       }
       if (item){
+        optionReset();
         item = false;
         menu = true;
       }
       if (target){
+        optionReset();
         target = false;
         attack = true;
       }
@@ -285,6 +291,10 @@ class Combat{
       }
     }
    
+   }
+   
+   void optionReset(){
+   option = 0;
    }
   
 }
