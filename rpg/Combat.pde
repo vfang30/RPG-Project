@@ -15,10 +15,10 @@ class Combat{
     image(background, 0, 0);
     drawInfo();
     for (int i = 0; i < party.size(); i +=1){
-      image(party.get(i).idleCycle[(int)idle], 100, (i * 200) + 80);
+      image(party.get(i).idleCycle[(int)idle], 100, (i * 150) + 70);
     }
     for (int i = 0; i < enemies.size(); i +=1){
-      image(enemies.get(i).idleCycle[(int)idle], 800, (i * 200) + 100);
+      image(enemies.get(i).idleCycle[(int)idle], 800, (i * 150) + 70);
     }
   }
     
