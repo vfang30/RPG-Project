@@ -44,6 +44,12 @@ class Combat{
     if (keyCode == 'D'){
       option +=1;
     }
+    if (keyCode == ENTER){
+      if (option == 0 && menu){
+        menu = false;
+        attack = true;
+      }
+    }
   }
   
   
@@ -51,16 +57,21 @@ class Combat{
     
     image(background, 0, 0);
     
-    boolean left = keyboardInput.isPressed(Controller.MOVE_LEFT);
-    boolean right = keyboardInput.isPressed(Controller.MOVE_RIGHT);
-    boolean up = keyboardInput.isPressed(Controller.JUMP);
-    boolean down = keyboardInput.isPressed(Controller.MOVE_DOWN);
     boolean ent = keyboardInput.isPressed(Controller.ENT);
     boolean cancel = keyboardInput.isPressed(Controller.CANCEL);
     
     if (menu){
       if (option > 2){
         option = 2;
+      }
+      if (option < 0){
+        option = 0;
+      }
+    }
+    
+    if (attack){
+      if (option > 1){
+        option = 1;
       }
       if (option < 0){
         option = 0;
@@ -74,28 +85,6 @@ class Combat{
         item = false;
     }
     
-    if (down){
-    top = false;
-    }
-    
-    if (up){
-    top = true;
-    }
-    
-    
-    if (left && attackOption > 0){
-      attackOption -=0.09;
-    }
-    
-    
-    if (right && attackOption < 1){
-      attackOption +=0.09;
-    }
-    
-    if (ent && (int)option == 0 && menu){
-      attack = true;
-      menu = false;
-    }
     
     if (ent && (int)option == 1 && menu){
       item = true;
@@ -175,28 +164,28 @@ class Combat{
      fill(0);
      rect(0, 650, 1100, 250);
      
-     if ((int)attackOption == 0 && top){
+     if ((int)option == 0 && top){
        fill(30);
      }else{
      fill(128);
      }
      rect(110, 690, 400, 80); 
      
-     if ((int)attackOption == 1 && top){
+     if ((int)option == 1 && top){
        fill(30);
      }else{
      fill(128);
      }
      rect(590, 690, 400, 80); 
      
-     if ((int)attackOption == 0 && !top){
+     if ((int)option == 0 && !top){
        fill(30);
      }else{
      fill(128);
      }
      rect(110, 810, 400, 80); 
      
-     if ((int)attackOption == 1 && !top){
+     if ((int)option == 1 && !top){
        fill(30);
      }else{
      fill(128);
