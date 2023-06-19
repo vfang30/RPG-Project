@@ -4,20 +4,30 @@ class Combat{
   ArrayList<Fighter> party;
   ArrayList<Fighter> enemies;
   int turn;
+  
   float option;
   float attackOption;
+  
   boolean attack;
+  boolean item;
   boolean top;
+  
+  boolean menu;
   
   public Combat(ArrayList<Fighter> party, ArrayList<Fighter> enemies){
     this.party = party;
     this.enemies = enemies;
+    
     background = loadImage("battlebackground.png");
     background.resize(1100, 900);
     turn = 1;
+    
     option = 0;
     attackOption = 0;
+    
+    menu = true;
     attack = false;
+    item = false;
     top = true;
   }
   
@@ -33,7 +43,10 @@ class Combat{
     boolean cancel = keyboardInput.isPressed(Controller.CANCEL);
     
     if (cancel){
-    attack = false;
+      if (attack)
+        attack = false;
+      if (item)
+        item = false;
     }
     
     if (down){
@@ -60,25 +73,31 @@ class Combat{
       attackOption +=0.09;
     }
     
-    if (ent && (int)option == 0){
+    if (ent && (int)option == 0 && menu){
       attack = true;
+      menu = false;
+    }
+    
+    if (ent && (int)option == 1 && menu){
+      item = true;
+      menu = false;
     }
     
     if (attack){
      drawAttacks();
     }
     
-    if (ent && (int)option == 1){
-      println("items");
+    if (item){
+      drawItems();
     }
     
-    if (ent && (int)option == 2){
+    if (ent && (int)option == 2 && menu){
       println("run");
     }
     
 
     
-    if (!attack){
+    if (!attack && !item){
       drawInfo();
       drawOptions();
     }
@@ -173,6 +192,11 @@ class Combat{
      text("Move2", 725, 745);  
      text("Move3", 255, 865);
      text("Move4", 725, 865);
+   }
+   
+   void drawItems(){
+     fill(0);
+     rect(0, 650, 1100, 250);
    }
    
    void drawInfo(){
