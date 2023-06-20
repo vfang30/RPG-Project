@@ -177,7 +177,7 @@ class Combat{
    
    void drawAttacks(){
      fill(0);
-     rect(0, 650, 1100, 250);
+     rect(0, 650, 1200, 250);
      
      if (option == 0 && top){
        fill(30);
@@ -219,14 +219,14 @@ class Combat{
    
    void drawItems(){
      fill(0);
-     rect(0, 650, 1100, 250);
+     rect(0, 650, 1200, 250);
    }
    
    void drawTargets(ArrayList<Fighter> targets){
      fill(0);
-     rect(0, 660, 1100, 250);
+     rect(0, 650, 1200, 250);
      
-       //Option Highlighter
+       ////Option Highlighter
        noStroke();
        fill(255, 207, 64);
        //Top Rectangle
@@ -244,27 +244,21 @@ class Combat{
      for (int i = 0; i < targets.size(); i +=1){
        
        //Health
-       fill(255);
-       rect(400, (i * 70) + 680, 300, 35);
-       
-       fill(0, 255, 0);
-       rect(400, (i * 70) + 680, (float)targets.get(i).getHP()/targets.get(i).getMaxHP() * 300, 35);
+       healthBar.resize((int)((float)targets.get(i).getHP()/targets.get(i).getMaxHP() * 300) , 35);
+       image(healthBar, 400, (i * 60) + 686);
        
        //Mana
-       fill(255);
-       rect(750, (i * 70) + 680, 230, 35);
-       
-       fill(0, 0, 255);
-       rect(750, (i * 70) + 680, (float)targets.get(i).getMana()/targets.get(i).getMaxMana() * 230, 35);
+       manaBar.resize((int)((float)targets.get(i).getMana()/targets.get(i).getMaxMana() * 300) , 35);
+       image(manaBar, 750, (i * 60) + 686);
        
        //Portrait
        PImage portrait = party.get(i).getPortrait().copy();
-       portrait.resize(55, 0);
-       image(portrait, 100, (i * 70) + 670);
+       portrait.resize(35, 0);
+       image(portrait, 100, (i * 60) + 686);
        
        fill(255);
-       textSize(35);
-       text(party.get(i).getName(), 220, (i * 70) + 710);
+       textSize(25);
+       text(party.get(i).getName(), 220, (i * 60) + 715);
        
      }
    }
@@ -275,24 +269,29 @@ class Combat{
      
      for (int i = 0; i < party.size(); i +=1){
       
-       ////Health
+       //Health
        healthBar.resize((int)((float)party.get(i).getHP()/party.get(i).getMaxHP() * 191) , 9);
        image(healthBar, (i * 400) + 181, 752);
        
        textSize(15);
        text(party.get(i).getHP() + " / " + party.get(i).getMaxHP() + " HP" , (i * 400) + 190, 790);
        
-       ////Mana
+       //Mana
        manaBar.resize((int)((float)party.get(i).getMana()/party.get(i).getMaxMana() * 191) , 9);
        image(manaBar, (i * 400) + 181, 802);
        
        textSize(15);
        text(party.get(i).getMana() + " / " + party.get(i).getMaxMana() + " MANA" , (i * 400) + 190, 840);
       
-       // //Portrait
+       //Portrait
        image(party.get(i).getPortrait(), (i * 400) + 30, 685);
        
-       ////Name
+       //Level
+       fill(255);
+       textSize(20);
+       text("LVL: "+party.get(i).getLevel(), (i * 400) + 90, 830);
+       
+       //Name
        fill(255);
        textSize(25);
        text(party.get(i).getName(), (i * 400) + 190, 710);

@@ -54,7 +54,7 @@ abstract class Fighter{
     return xp;
   }
   
-  public int getlevel(){
+  public int getLevel(){
     return level;
   }
   
