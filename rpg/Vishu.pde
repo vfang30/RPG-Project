@@ -5,7 +5,7 @@ class Vishu extends Fighter{
     super("Vishu", 20, 5, 20);
     super.avatar = loadImage("idle/normal/"+"character.png");
     super.avatarIdle = loadImage("idle/normal/"+"characteridle.png");
-    super.portrait = loadImage("Vishuportrait.png");
+    super.portrait = loadImage("portraits/"+"Vishuportrait.png");
     
     super.idleCycle[0] = super.avatar;
     super.idleCycle[1] = super.avatarIdle;

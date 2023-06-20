@@ -24,13 +24,13 @@ class Combat{
     this.party = party;
     this.enemies = enemies;
     
-    background = loadImage("battlebackground.png");
+    background = loadImage("battle/"+"battlebackground.png");
     background.resize(1200, 900);
     turn = 1;
     
-    battleInfo = loadImage("battleinfo.png");
-    healthBar = loadImage("healthbar.png");
-    manaBar = loadImage("manabar.png");
+    battleInfo = loadImage("battle/"+"battleinfo.png");
+    healthBar = loadImage("battle/"+"healthbar.png");
+    manaBar = loadImage("battle/"+"manabar.png");
     
     option = 0;
     
@@ -331,6 +331,7 @@ class Combat{
    }
    
    void optionReset(){
+   top = true;
    option = 0;
    }
   

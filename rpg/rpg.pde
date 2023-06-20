@@ -41,10 +41,10 @@ void setup() {
   
   idle = 0;
   
-  areaOne = loadImage("areaone.png");
+  areaOne = loadImage("areas/"+"areaone.png");
   areaOne.resize(1200, 900);
   
-  areaZero = loadImage("areazero.png");
+  areaZero = loadImage("areas/"+"areazero.png");
   areaZero.resize(1200, 900);
 
   
