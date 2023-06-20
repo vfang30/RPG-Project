@@ -104,6 +104,7 @@ class Combat{
     optionHover();
     drawMenu();
 
+
     for (int i = 0; i < party.size(); i +=1){
       image(party.get(i).idleCycle[(int)idle], 100, (i * 150) + 70);
     }

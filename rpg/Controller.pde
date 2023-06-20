@@ -41,7 +41,7 @@ class Controller {
     inputs[MOVE_RIGHT] = false;
     }
     
-    if(code == 'W'  && player.yPos >= 490){
+    if (code == 'W'  && player.yPos >= 690){
     inputs[JUMP] = false;
     jump = true;
     }

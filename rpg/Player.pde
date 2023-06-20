@@ -39,7 +39,7 @@ int direction;
 
   public Player(){
   xPos = 450;
-  yPos = 650;
+  yPos = 690;
   direction = EAST;
  
   //normal idle sprites
@@ -51,35 +51,30 @@ int direction;
   //flipped idle sprites
   for (int i = 0; i < 2; i +=1){
     PImage image = loadImage("idle/flip/"+idleFlip[i]);
-    image.resize(150, 0);
     idleCycleFlipped[i] = image;
   }
   
   //run sprites
   for (int i = 0; i < 8; i +=1){
     PImage image = loadImage("run/normal/"+run[i]);
-    image.resize(150, 0);
     runCycle[i] = image;
   }
   
   //flipped run sprites
   for (int i = 0; i < 8; i +=1){
     PImage image = loadImage("run/flip/"+runFlip[i]);
-    image.resize(150, 0);
     runCycleFlipped[i] = image;
   }
   
   //jump sprites
   for (int i = 0; i < 8; i +=1){
     PImage image = loadImage("jump/normal/"+jump[i]);
-    image.resize(150, 0);
     jumpCycle[i] = image;
   }
   
   //flipped jump sprites
   for (int i = 0; i < 8; i +=1){
     PImage image = loadImage("jump/flip/"+jumpFlip[i]);
-    image.resize(150, 0);
     jumpCycleFlipped[i] = image;
   }
 
