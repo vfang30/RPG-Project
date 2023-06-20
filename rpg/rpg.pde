@@ -48,7 +48,7 @@ void setup() {
   areaZero.resize(1200, 900);
 
   
-  movementSpeed = 7;
+  movementSpeed = 8;
   currentRun = 0;
   
   keyboardInput = new Controller();
@@ -82,6 +82,9 @@ void setup() {
 void keyPressed() {
   if (!fight){
     keyboardInput.press(keyCode);
+    if (keyCode == UP && player.yPos >= 690){
+      jump = true;
+    }
   }
   if (fight){
     testing.keyPressedCombat();
@@ -198,12 +201,14 @@ void movement(){
 
   if (left && player.xPos > 40) {
     
-  loadBackground();
   player.xPos = player.xPos - movementSpeed; //shift the player's x coord to the left
   player.direction = Player.WEST; //change the direction to west for the idle cycle
   
+  if (player.yPos >= 690){
+  loadBackground();
   image(player.runCycleFlipped[(int)currentRun], player.xPos, player.yPos);
   currentRun +=.05;
+  }
   
   //reset run cycle
   if (currentRun > 7){
@@ -215,12 +220,14 @@ void movement(){
 
   if (right && player.xPos < 1000) {
     
-  loadBackground();
   player.xPos = player.xPos + movementSpeed; //shift the player's x coord to the right
   player.direction = Player.EAST; //change the direction to east for the idle cycle
   
+  if (player.yPos >= 690){
+  loadBackground();
   image(player.runCycle[(int)currentRun], player.xPos, player.yPos);
   currentRun +=.05;
+  }
   
     //reset run cycle
    if (currentRun > 7){

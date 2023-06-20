@@ -42,25 +42,25 @@ class Combat{
   }
   
   void keyPressedCombat(){
-    if (keyCode == 'W'){
+    if (keyCode == UP){
       top = true;
       if (target){
       option -=1;
       }
     }
-    if (keyCode == 'S'){
+    if (keyCode == DOWN){
       top = false;
       if (target){
       option +=1;
       }
     }
-    if (keyCode == 'A' && !target){
+    if (keyCode == LEFT && !target){
       option -=1;
     }
-    if (keyCode == 'D' && !target){
+    if (keyCode == RIGHT && !target){
       option +=1;
     }
-    if (keyCode == ENTER){
+    if (keyCode == 'X'){
       
       if (option == 0 && menu){
       optionReset();
@@ -77,7 +77,7 @@ class Combat{
       targetTeamSize = enemies.size();
       }      
     }
-    if (keyCode == 'X'){
+    if (keyCode == 'Z'){
       if (attack){
         optionReset();
         attack = false;
