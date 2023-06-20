@@ -1,11 +1,17 @@
+
+
+
+
 /* Right now the character will stop falling once they fall below a certain y coord but this is gonna have to be changed in the future
 if we ever add any platforming/anything that would require jumping -Victor */ 
 
 
+PFont font;
 
+boolean fight;
 
 double idle; //idle state 
-float gravity = .8; 
+float gravity = .7; 
 float velocityDown = 0; 
 float velocityUp = 20;
 
@@ -24,46 +30,84 @@ Controller keyboardInput;
 
 PImage[] location; //plan to use this to store diffeent locations in the game
 
+//TESTING CODE
+Combat testing;
+
+void setup() {
+  size(1200, 900);
+  
+  font = createFont("FFFFORWA.TTF", 128);
+  textFont(font);
+  
+  idle = 0;
+  
+  areaOne = loadImage("areaone.png");
+  areaOne.resize(1200, 900);
+  
+  areaZero = loadImage("areazero.png");
+  areaZero.resize(1200, 900);
+
+  
+  movementSpeed = 7;
+  currentRun = 0;
+  
+  keyboardInput = new Controller();
+  player = new Player();
+  
+  jump = false;
+  currentJump = 0;
+  
+  //TESTING CODE
+  fight = false;
+  Vishu one = new Vishu();
+  one.setHP(10);
+  one.setMana(14);
+  Vishu two = new Vishu();
+  Vishu three = new Vishu();
+  ArrayList<Fighter> party = new ArrayList<Fighter>();
+  party.add(one);
+  party.add(two);
+  party.add(three);
+  
+  Vishu four = new Vishu();
+  Vishu five = new Vishu();
+  Vishu six = new Vishu();
+  ArrayList<Fighter> enemies = new ArrayList<Fighter>();
+  enemies.add(four);
+  enemies.add(five);
+  enemies.add(six);
+  testing = new Combat(party, enemies);
+}
+
 void keyPressed() {
-  keyboardInput.press(keyCode);
+  if (!fight){
+    keyboardInput.press(keyCode);
+  }
+  if (fight){
+    testing.keyPressedCombat();
+  }
 }
 
 void keyReleased() {
   keyboardInput.release(keyCode);
 }
 
-
-void setup() {
-  size(1100, 900);
-  
-  idle = 0;
-  
-  areaOne = loadImage("areaone.png");
-  areaOne.resize(1100, 900);
-  
-  areaZero = loadImage("areazero.png");
-  areaZero.resize(1100, 900);
-
-  
-  movementSpeed = 7;
-  currentRun = 0;
-  
-  player = new Player();
-  keyboardInput = new Controller();
-  
-  jump = false;
-  currentJump = 0;
-  
-
+void mouseClicked(){
+fight = !fight;
 }
 
 void draw() {
   background(255);
   image(areaZero, 0, 0);
   
+  if (fight){
+  testing.run();
+  }else{
+  
   playerDraw();
   movement();
   gravity();
+  }
   
   //update the idle stance
   idle += 0.03;
