@@ -6,6 +6,10 @@ class Combat{
   PImage healthBar;
   PImage manaBar;
   
+  PImage atkButton;
+  PImage itemButton;
+  PImage runButton;
+  
   ArrayList<Fighter> party;
   ArrayList<Fighter> enemies;
   
@@ -31,6 +35,10 @@ class Combat{
     battleInfo = loadImage("battle/"+"battleinfo.png");
     healthBar = loadImage("battle/"+"healthbar.png");
     manaBar = loadImage("battle/"+"manabar.png");
+    
+    atkButton = loadImage("battle/"+"attack.png");
+    itemButton = loadImage("battle/"+"item.png");
+    runButton = loadImage("battle/"+"run.png");
     
     option = 0;
     
@@ -146,33 +154,34 @@ class Combat{
    
    void drawOptions(){
      
-     textSize(25);
+     textSize(20);
      
      if (option == 0){
        fill(30);
      }else{
      fill(128);
      }
-     rect(0, 600, 220, 50);
+     //rect(0, 600, 220, 50);
+     image(atkButton, 0, 562);
      
      if (option == 1){
        fill(30);
      }else{
      fill(128);
      }
-     rect(440, 600, 220, 50);
+     image(itemButton, 492, 562);
      
      if (option == 2){
        fill(30);
      }else{
      fill(128);
      }
-     rect(880, 600, 220, 50);
+     image(runButton, 944, 562);
      
      fill(255);
-     text("ATTACK", 30, 640);
-     text("ITEMS", 480, 640);
-     text("RUN", 940, 640);
+     text("ATTACK", 75, 615);
+     text("ITEMS", 572, 615);
+     text("RUN", 1050, 615);
    }
    
    void drawAttacks(){

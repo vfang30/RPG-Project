@@ -18,10 +18,11 @@
 ## 6/19/23
 
 ### General
-* Increases screen size
+* Increased screen size
 * Manually resized Vishu's sprites so they don't look poopy dog water quality.
 * Run animation is no longer called while midair.
 * Organized area images and combat images
+* Changed controls from WASD to arrow keys
 
 ### Combat
 * Separated keyboard press inputs for fight mode.
