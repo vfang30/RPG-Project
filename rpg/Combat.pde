@@ -8,6 +8,10 @@ class Combat{
   PImage manaBar;
   
   PImage sel;
+  PImage selTwo;
+  PImage[] selCycle;
+  float cycle;
+  
   PImage atkButton;
   PImage itemButton;
   PImage runButton;
@@ -39,7 +43,13 @@ class Combat{
     healthBar = loadImage("battle/"+"healthbar.png");
     manaBar = loadImage("battle/"+"manabar.png");
     
+    cycle = 0;
     sel = loadImage("battle/"+"selHand.png");
+    selTwo = loadImage("battle/"+"selHand2.png");
+    selCycle = new PImage[2];
+    selCycle[0] = sel;
+    selCycle[1] = selTwo;
+    
     atkButton = loadImage("battle/"+"attack.png");
     itemButton = loadImage("battle/"+"item.png");
     runButton = loadImage("battle/"+"run.png");
@@ -111,6 +121,11 @@ class Combat{
   
   void run(){
     
+    cycle += 0.08;
+    if ((int)cycle > 1){
+    cycle = 0;
+    }
+    
     image(background, 0, 0);
     image(turnOrder, 210, 0);
     
@@ -164,27 +179,28 @@ class Combat{
      
      
      if (option == 0){
-     image(sel, 126, 515);
-     image(atkButton, 0, 597);
-     text("ATTACK", 75, 650);
+     image(selCycle[(int)cycle], 115, 495 + (int)cycle * 20);
+     image(atkButton, 0, 587);
+     text("ATTACK", 75, 640);
+     
      }else{
      image(atkButton, 0, 612);
      text("ATTACK", 75, 665);
      }
      
      if (option == 1){
-     image(sel, 252 + 126 + 240, 515);
-     image(itemButton, 492, 597);
-     text("ITEMS", 572, 650);
+     image(selCycle[(int)cycle], 600, 495 + (int)cycle * 20);
+     image(itemButton, 492, 587);
+     text("ITEMS", 572, 640);
      }else{
      image(itemButton, 492, 612);
      text("ITEMS", 572, 665);
      }
      
      if (option == 2){
-     image(sel, 252 + 126 + 126 + 480, 515);
-     image(runButton, 944, 597);
-     text("RUN", 1050, 650);
+     image(selCycle[(int)cycle], 1050, 495 + (int)cycle * 20);
+     image(runButton, 944, 587);
+     text("RUN", 1050, 640);
      }else{
      image(runButton, 944, 612);
      text("RUN", 1050, 665);
