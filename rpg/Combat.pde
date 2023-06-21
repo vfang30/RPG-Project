@@ -6,6 +6,7 @@ class Combat{
   PImage healthBar;
   PImage manaBar;
   
+  PImage sel;
   PImage atkButton;
   PImage itemButton;
   PImage runButton;
@@ -36,6 +37,7 @@ class Combat{
     healthBar = loadImage("battle/"+"healthbar.png");
     manaBar = loadImage("battle/"+"manabar.png");
     
+    sel = loadImage("battle/"+"selHand.png");
     atkButton = loadImage("battle/"+"attack.png");
     itemButton = loadImage("battle/"+"item.png");
     runButton = loadImage("battle/"+"run.png");
@@ -114,10 +116,10 @@ class Combat{
 
 
     for (int i = 0; i < party.size(); i +=1){
-      image(party.get(i).idleCycle[(int)idle], 100, (i * 150) + 70);
+      image(party.get(i).idleCycle[(int)idle], 100, (i * 130) + 100);
     }
     for (int i = 0; i < enemies.size(); i +=1){
-      image(enemies.get(i).idleCycle[(int)idle], 800, (i * 150) + 70);
+      image(enemies.get(i).idleCycle[(int)idle], 800, (i * 130) + 100);
     }
   }
     
@@ -155,33 +157,36 @@ class Combat{
    void drawOptions(){
      
      textSize(20);
+     fill(255);
+     
      
      if (option == 0){
-       fill(30);
+     image(sel, 126, 500);
+     image(atkButton, 0, 582);
+     text("ATTACK", 75, 635);
      }else{
-     fill(128);
+     image(atkButton, 0, 612);
+     text("ATTACK", 75, 665);
      }
-     //rect(0, 600, 220, 50);
-     image(atkButton, 0, 562);
      
      if (option == 1){
-       fill(30);
+     image(sel, 252 + 126 + 240, 500);
+     image(itemButton, 492, 582);
+     text("ITEMS", 572, 635);
      }else{
-     fill(128);
+     image(itemButton, 492, 612);
+     text("ITEMS", 572, 665);
      }
-     image(itemButton, 492, 562);
      
      if (option == 2){
-       fill(30);
+     image(sel, 252 + 126 + 126 + 480, 500);
+     image(runButton, 944, 582);
+     text("RUN", 1050, 635);
      }else{
-     fill(128);
+     image(runButton, 944, 612);
+     text("RUN", 1050, 665);
      }
-     image(runButton, 944, 562);
      
-     fill(255);
-     text("ATTACK", 75, 615);
-     text("ITEMS", 572, 615);
-     text("RUN", 1050, 615);
    }
    
    void drawAttacks(){
@@ -274,36 +279,36 @@ class Combat{
    
    void drawInfo(){
      
-     image(battleInfo, 0, 650);
+     image(battleInfo, 0, 700);
      
      for (int i = 0; i < party.size(); i +=1){
       
        //Health
-       healthBar.resize((int)((float)party.get(i).getHP()/party.get(i).getMaxHP() * 191) , 9);
-       image(healthBar, (i * 400) + 181, 752);
+       healthBar.resize((int)((float)party.get(i).getHP()/party.get(i).getMaxHP() * 191) , 7);
+       image(healthBar, (i * 400) + 181, 782);
        
-       textSize(15);
-       text(party.get(i).getHP() + " / " + party.get(i).getMaxHP() + " HP" , (i * 400) + 190, 790);
+       textSize(13);
+       text(party.get(i).getHP() + " / " + party.get(i).getMaxHP() + " HP" , (i * 400) + 190, 810);
        
        //Mana
-       manaBar.resize((int)((float)party.get(i).getMana()/party.get(i).getMaxMana() * 191) , 9);
-       image(manaBar, (i * 400) + 181, 802);
+       manaBar.resize((int)((float)party.get(i).getMana()/party.get(i).getMaxMana() * 191) , 7);
+       image(manaBar, (i * 400) + 181, 822);
        
-       textSize(15);
-       text(party.get(i).getMana() + " / " + party.get(i).getMaxMana() + " MANA" , (i * 400) + 190, 840);
+       textSize(13);
+       text(party.get(i).getMana() + " / " + party.get(i).getMaxMana() + " MANA" , (i * 400) + 190, 850);
       
        //Portrait
-       image(party.get(i).getPortrait(), (i * 400) + 30, 685);
+       image(party.get(i).getPortrait(), (i * 400) + 30, 715);
        
        //Level
        fill(255);
-       textSize(20);
-       text("LVL: "+party.get(i).getLevel(), (i * 400) + 90, 830);
+       textSize(18);
+       text("LVL: "+party.get(i).getLevel(), (i * 400) + 90, 860);
        
        //Name
        fill(255);
-       textSize(25);
-       text(party.get(i).getName(), (i * 400) + 190, 710);
+       textSize(23);
+       text(party.get(i).getName(), (i * 400) + 190, 760);
 
      }
    }
