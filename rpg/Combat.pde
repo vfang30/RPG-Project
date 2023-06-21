@@ -1,7 +1,8 @@
 import java.util.*;
 class Combat{
-  
+ 
   PImage background;
+  PImage turnOrder;
   PImage battleInfo;
   PImage healthBar;
   PImage manaBar;
@@ -31,6 +32,7 @@ class Combat{
     
     background = loadImage("battle/"+"battlebackground.png");
     background.resize(1200, 900);
+    turnOrder = loadImage("battle/"+"turnOrder.png");
     turn = 1;
     
     battleInfo = loadImage("battle/"+"battleinfo.png");
@@ -110,16 +112,17 @@ class Combat{
   void run(){
     
     image(background, 0, 0);
+    image(turnOrder, 210, 0);
     
     optionHover();
     drawMenu();
 
 
     for (int i = 0; i < party.size(); i +=1){
-      image(party.get(i).idleCycle[(int)idle], 100, (i * 130) + 100);
+      image(party.get(i).idleCycle[(int)idle], 150, (i * 130) + 120);
     }
     for (int i = 0; i < enemies.size(); i +=1){
-      image(enemies.get(i).idleCycle[(int)idle], 800, (i * 130) + 100);
+      image(enemies.get(i).idleCycle[(int)idle], 900, (i * 130) + 120);
     }
   }
     
@@ -161,27 +164,27 @@ class Combat{
      
      
      if (option == 0){
-     image(sel, 126, 500);
-     image(atkButton, 0, 582);
-     text("ATTACK", 75, 635);
+     image(sel, 126, 515);
+     image(atkButton, 0, 597);
+     text("ATTACK", 75, 650);
      }else{
      image(atkButton, 0, 612);
      text("ATTACK", 75, 665);
      }
      
      if (option == 1){
-     image(sel, 252 + 126 + 240, 500);
-     image(itemButton, 492, 582);
-     text("ITEMS", 572, 635);
+     image(sel, 252 + 126 + 240, 515);
+     image(itemButton, 492, 597);
+     text("ITEMS", 572, 650);
      }else{
      image(itemButton, 492, 612);
      text("ITEMS", 572, 665);
      }
      
      if (option == 2){
-     image(sel, 252 + 126 + 126 + 480, 500);
-     image(runButton, 944, 582);
-     text("RUN", 1050, 635);
+     image(sel, 252 + 126 + 126 + 480, 515);
+     image(runButton, 944, 597);
+     text("RUN", 1050, 650);
      }else{
      image(runButton, 944, 612);
      text("RUN", 1050, 665);
