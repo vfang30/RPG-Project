@@ -59,9 +59,9 @@ void setup() {
   
   //TESTING CODE
   fight = false;
-  Vishu one = new Vishu("one");
-  Vishu two = new Vishu("two");
-  Vishu three = new Vishu("three");
+  Vishu one = new Vishu();
+  Vishu two = new Vishu();
+  Vishu three = new Vishu();
   
   one.setSpeed(1);
   two.setSpeed(2);
@@ -73,9 +73,9 @@ void setup() {
   party.add(three);
   
   
-  Vishu four = new Vishu("four");
-  Vishu five = new Vishu("five");
-  Vishu six = new Vishu("six");
+  Vishu four = new Vishu();
+  Vishu five = new Vishu();
+  Vishu six = new Vishu();
   
   four.setSpeed(4);
   five.setSpeed(5);

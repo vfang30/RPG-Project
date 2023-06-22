@@ -20,6 +20,7 @@ class Combat{
   ArrayList<Fighter> party;
   ArrayList<Fighter> enemies;
   ArrayList<Fighter> turnOrder;
+  Fighter current;
   
   int turn;
   int option;
@@ -124,16 +125,15 @@ class Combat{
   
   void run(){
     
+    image(background, 0, 0);
     turnOrder();
-    turnTest();
+    current = turnOrder.get((turn + 1) % (party.size() + enemies.size()));
     
     cycle += 0.08;
     if ((int)cycle > 1){
     cycle = 0;
     }
     
-    image(background, 0, 0);
-    image(turnDisplay, 210, 0);
     
     optionHover();
     drawMenu();
@@ -158,6 +158,8 @@ class Combat{
    }
    
    void turnOrder(){
+      image(turnDisplay, 210, 0);
+     
      turnOrder = new ArrayList<Fighter>();
      for (int i = 0; i < party.size(); i +=1){
        turnOrder.add(party.get(i));
@@ -181,7 +183,7 @@ class Combat{
    void turnTest(){
      String res = "";
      for (int i = 0; i < turnOrder.size(); i +=1){
-       res += " " + turnOrder.get(i).nickname + " " + turnOrder.get(i).getSpeed();
+       res += " " + turnOrder.get(i).getSpeed();
      }
      println(res);
    }
