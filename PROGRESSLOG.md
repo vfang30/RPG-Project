@@ -29,3 +29,14 @@
   * Results in cleaner option selects.
 * Created prototype screens for attacking, selecting a target, picking a move.
 * Created background for battle info.
+
+## 6/21/23
+
+### Fighter
+* Added a speed stat which will be used to determine turn order.
+
+### Combat
+* Added a button for recharge (currently not functional).
+* Added animation for option select.
+* Added picture for turn order on top of screen.
+* Added an arraylist of fighters to keep track of turn order, fighters are sorted using insertion sort based on speed.
