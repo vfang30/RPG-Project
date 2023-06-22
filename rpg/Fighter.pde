@@ -67,6 +67,10 @@ abstract class Fighter{
   public PImage getPortrait(){
     return portrait;
   }
+  
+  public String attack(Fighter other){
+  return "a";
+  }
 
   //set methods
   public void setHP(int health){

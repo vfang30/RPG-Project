@@ -103,6 +103,11 @@ class Combat{
       attack = false;
       target = true;
       targetTeamSize = enemies.size();
+      }else if (target)  {
+      target = false;
+      println(current.attack(enemies.get(option)));
+      menu = true;
+      turn +=1;
       }      
     }
     if (keyCode == 'Z'){
@@ -301,6 +306,7 @@ class Combat{
      
      for (int i = 0; i < targets.size(); i +=1){
        
+       if (targets.get(i).getHP() > 0){
        //Health
        healthBar.resize((int)((float)targets.get(i).getHP()/targets.get(i).getMaxHP() * 300) , 35);
        image(healthBar, 400, (i * 60) + 686);
@@ -317,7 +323,7 @@ class Combat{
        fill(255);
        textSize(25);
        text(party.get(i).getName(), 220, (i * 60) + 715);
-       
+       }
      }
    }
    
