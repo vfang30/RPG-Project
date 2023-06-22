@@ -69,7 +69,9 @@ abstract class Fighter{
   }
   
   public String attack(Fighter other){
-  return "a";
+    int damage = (int)(random(atk/2, atk * 2));
+    other.applyDamage(damage);
+    return (this + " attacked " + other + " for " + damage + " damage!");
   }
 
   //set methods

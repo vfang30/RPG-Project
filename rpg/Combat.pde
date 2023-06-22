@@ -105,9 +105,9 @@ class Combat{
       targetTeamSize = enemies.size();
       }else if (target)  {
       target = false;
-      println(current.attack(enemies.get(option)));
       menu = true;
       turn +=1;
+      optionReset();
       }      
     }
     if (keyCode == 'Z'){
@@ -134,7 +134,10 @@ class Combat{
     
     image(background, 0, 0);
     turnOrder();
-    current = turnOrder.get((turn + 1) % (party.size() + enemies.size()));
+    current = turnOrder.get((turn - 1) % (party.size() + enemies.size()));
+    textSize(50);
+    fill(255);
+    text(current.getSpeed(), 400, 400);
     
     cycle += 0.08;
     if ((int)cycle > 1){

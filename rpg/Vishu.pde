@@ -14,10 +14,4 @@ class Vishu extends Fighter{
     super.idleCycle[1] = super.avatarIdle;
 
   }
-  
-  public String attack(Fighter other){
-    int damage = (int)(random(super.atk/2, super.atk * 2));
-    other.applyDamage(damage);
-    return (this + " attacked " + other + " for " + damage + " damage!");
-  }
 }
