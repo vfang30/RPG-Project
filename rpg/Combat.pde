@@ -90,7 +90,7 @@ class Combat{
       optionReset();
       menu = false;
       attack = true;
-      }else if (option == 1 && menu) {
+      }else if (option == 2 && menu) {
       optionReset();
       menu = false;
       item = true;
