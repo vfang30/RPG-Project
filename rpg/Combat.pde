@@ -181,7 +181,7 @@ class Combat{
    void turnTest(){
      String res = "";
      for (int i = 0; i < turnOrder.size(); i +=1){
-       res += " " + turnOrder.get(i).getSpeed();
+       res += " " + turnOrder.get(i).nickname + " " + turnOrder.get(i).getSpeed();
      }
      println(res);
    }
