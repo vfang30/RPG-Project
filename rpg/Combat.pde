@@ -2,7 +2,7 @@ import java.util.*;
 class Combat{
  
   PImage background;
-  PImage turnOrder;
+  PImage turnDisplay;
   PImage battleInfo;
   PImage healthBar;
   PImage manaBar;
@@ -19,6 +19,7 @@ class Combat{
   
   ArrayList<Fighter> party;
   ArrayList<Fighter> enemies;
+  ArrayList<Fighter> turnOrder;
   
   int turn;
   int option;
@@ -37,7 +38,7 @@ class Combat{
     
     background = loadImage("battle/"+"battlebackground.png");
     background.resize(1200, 900);
-    turnOrder = loadImage("battle/"+"turnOrder.png");
+    turnDisplay = loadImage("battle/"+"turnOrder.png");
     turn = 1;
     
     battleInfo = loadImage("battle/"+"battleinfo.png");
@@ -123,13 +124,15 @@ class Combat{
   
   void run(){
     
+    turnOrder();
+    
     cycle += 0.08;
     if ((int)cycle > 1){
     cycle = 0;
     }
     
     image(background, 0, 0);
-    image(turnOrder, 210, 0);
+    image(turnDisplay, 210, 0);
     
     optionHover();
     drawMenu();
@@ -151,6 +154,28 @@ class Combat{
        }
      }
      return minOneAlive;
+   }
+   
+   void turnOrder(){
+     turnOrder = new ArrayList<Fighter>();
+     for (int i = 0; i < party.size(); i +=1){
+       turnOrder.add(party.get(i));
+     }
+     for (int i = 0; i < enemies.size(); i +=1){
+       turnOrder.add(enemies.get(i));
+     }
+     for (int keyIndex = 1; keyIndex < turnOrder.size(); keyIndex +=1){
+       int prev = keyIndex - 1;
+       Fighter prevF = turnOrder.get(prev);
+       Fighter compare = turnOrder.get(keyIndex);
+       int keySpeed = compare.getSpeed();
+       while (prev > -1 && keySpeed > turnOrder.get(prev).getSpeed()){
+         turnOrder.set(prev + 1, prevF);
+         prev -=1;
+       }
+       turnOrder.set(prev + 1, compare);
+     }
+     
    }
    
    void drawMenu(){
