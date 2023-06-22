@@ -144,6 +144,9 @@ class Combat{
     cycle = 0;
     }
     
+    if (enemyTurn()){
+      enemyAttack();
+    }
     
     optionHover();
     drawMenu();
@@ -190,13 +193,22 @@ class Combat{
      }
    }
    
-   void turnTest(){
-     String res = "";
-     for (int i = 0; i < turnOrder.size(); i +=1){
-       res += " " + turnOrder.get(i).getSpeed();
+   boolean enemyTurn(){
+     boolean enemy = false;
+     for (int i = 0; i < enemies.size(); i +=1){
+       if (enemies.get(i) == current){
+         enemy = true;
+       }
      }
-     println(res);
+     return enemy;
    }
+   
+   void enemyAttack(){
+     int target = (int)random(party.size());
+     println(current.attack(party.get(target)));
+     turn +=1;
+   }
+   
    
    void drawMenu(){
      
