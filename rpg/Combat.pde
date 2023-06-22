@@ -1,12 +1,19 @@
 import java.util.*;
 class Combat{
-  
+ 
   PImage background;
+  PImage turnOrder;
   PImage battleInfo;
   PImage healthBar;
   PImage manaBar;
   
+  PImage sel;
+  PImage selTwo;
+  PImage[] selCycle;
+  float cycle;
+  
   PImage atkButton;
+  PImage rechargeButton;
   PImage itemButton;
   PImage runButton;
   
@@ -30,13 +37,22 @@ class Combat{
     
     background = loadImage("battle/"+"battlebackground.png");
     background.resize(1200, 900);
+    turnOrder = loadImage("battle/"+"turnOrder.png");
     turn = 1;
     
     battleInfo = loadImage("battle/"+"battleinfo.png");
     healthBar = loadImage("battle/"+"healthbar.png");
     manaBar = loadImage("battle/"+"manabar.png");
     
+    cycle = 0;
+    sel = loadImage("battle/"+"selHand.png");
+    selTwo = loadImage("battle/"+"selHand2.png");
+    selCycle = new PImage[2];
+    selCycle[0] = sel;
+    selCycle[1] = selTwo;
+    
     atkButton = loadImage("battle/"+"attack.png");
+    rechargeButton = loadImage("battle/"+"recharge.png");
     itemButton = loadImage("battle/"+"item.png");
     runButton = loadImage("battle/"+"run.png");
     
@@ -74,7 +90,7 @@ class Combat{
       optionReset();
       menu = false;
       attack = true;
-      }else if (option == 1 && menu) {
+      }else if (option == 2 && menu) {
       optionReset();
       menu = false;
       item = true;
@@ -107,17 +123,23 @@ class Combat{
   
   void run(){
     
+    cycle += 0.08;
+    if ((int)cycle > 1){
+    cycle = 0;
+    }
+    
     image(background, 0, 0);
+    image(turnOrder, 210, 0);
     
     optionHover();
     drawMenu();
 
 
     for (int i = 0; i < party.size(); i +=1){
-      image(party.get(i).idleCycle[(int)idle], 100, (i * 150) + 70);
+      image(party.get(i).idleCycle[(int)idle], 150, (i * 130) + 120);
     }
     for (int i = 0; i < enemies.size(); i +=1){
-      image(enemies.get(i).idleCycle[(int)idle], 800, (i * 150) + 70);
+      image(enemies.get(i).idleCycle[(int)idle], 900, (i * 130) + 120);
     }
   }
     
@@ -155,33 +177,45 @@ class Combat{
    void drawOptions(){
      
      textSize(20);
+     fill(255);
+     
      
      if (option == 0){
-       fill(30);
+     image(selCycle[(int)cycle], 105, 495 + (int)cycle * 20);
+     image(atkButton, 0, 587);
+     text("ATTACK", 75, 640);
      }else{
-     fill(128);
+     image(atkButton, 0, 612);
+     text("ATTACK", 75, 665);
      }
-     //rect(0, 600, 220, 50);
-     image(atkButton, 0, 562);
      
      if (option == 1){
-       fill(30);
+     image(selCycle[(int)cycle], 410, 495 + (int)cycle * 20);
+     image(rechargeButton, 310, 587);
+     text("RECHARGE", 375, 640);
      }else{
-     fill(128);
+     image(rechargeButton, 310, 612);
+     text("RECHARGE", 375, 665);
      }
-     image(itemButton, 492, 562);
      
      if (option == 2){
-       fill(30);
+     image(selCycle[(int)cycle], 720, 495 + (int)cycle * 20);
+     image(itemButton, 632, 587);
+     text("ITEMS", 712, 640);
      }else{
-     fill(128);
+     image(itemButton, 632, 612);
+     text("ITEMS", 712, 665);
      }
-     image(runButton, 944, 562);
      
-     fill(255);
-     text("ATTACK", 75, 615);
-     text("ITEMS", 572, 615);
-     text("RUN", 1050, 615);
+     if (option == 3){
+     image(selCycle[(int)cycle], 1050, 495 + (int)cycle * 20);
+     image(runButton, 944, 587);
+     text("RUN", 1050, 640);
+     }else{
+     image(runButton, 944, 612);
+     text("RUN", 1050, 665);
+     }
+     
    }
    
    void drawAttacks(){
@@ -274,44 +308,44 @@ class Combat{
    
    void drawInfo(){
      
-     image(battleInfo, 0, 650);
+     image(battleInfo, 0, 700);
      
      for (int i = 0; i < party.size(); i +=1){
       
        //Health
-       healthBar.resize((int)((float)party.get(i).getHP()/party.get(i).getMaxHP() * 191) , 9);
-       image(healthBar, (i * 400) + 181, 752);
+       healthBar.resize((int)((float)party.get(i).getHP()/party.get(i).getMaxHP() * 191) , 7);
+       image(healthBar, (i * 400) + 181, 782);
        
-       textSize(15);
-       text(party.get(i).getHP() + " / " + party.get(i).getMaxHP() + " HP" , (i * 400) + 190, 790);
+       textSize(13);
+       text(party.get(i).getHP() + " / " + party.get(i).getMaxHP() + " HP" , (i * 400) + 190, 810);
        
        //Mana
-       manaBar.resize((int)((float)party.get(i).getMana()/party.get(i).getMaxMana() * 191) , 9);
-       image(manaBar, (i * 400) + 181, 802);
+       manaBar.resize((int)((float)party.get(i).getMana()/party.get(i).getMaxMana() * 191) , 7);
+       image(manaBar, (i * 400) + 181, 822);
        
-       textSize(15);
-       text(party.get(i).getMana() + " / " + party.get(i).getMaxMana() + " MANA" , (i * 400) + 190, 840);
+       textSize(13);
+       text(party.get(i).getMana() + " / " + party.get(i).getMaxMana() + " MANA" , (i * 400) + 190, 850);
       
        //Portrait
-       image(party.get(i).getPortrait(), (i * 400) + 30, 685);
+       image(party.get(i).getPortrait(), (i * 400) + 30, 715);
        
        //Level
        fill(255);
-       textSize(20);
-       text("LVL: "+party.get(i).getLevel(), (i * 400) + 90, 830);
+       textSize(18);
+       text("LVL: "+party.get(i).getLevel(), (i * 400) + 90, 860);
        
        //Name
        fill(255);
-       textSize(25);
-       text(party.get(i).getName(), (i * 400) + 190, 710);
+       textSize(23);
+       text(party.get(i).getName(), (i * 400) + 190, 760);
 
      }
    }
   
    void optionHover(){
      if (menu){
-      if (option > 2){
-        option = 2;
+      if (option > 3){
+        option = 3;
       }
       if (option < 0){
         option = 0;

@@ -3,6 +3,7 @@ abstract class Fighter{
   private String name;
   private int hp, maxHP;
   private int atk;
+  private int speed;
   private int mana, maxMana;
   private int xp;
   private int level;
@@ -11,11 +12,12 @@ abstract class Fighter{
   private PImage portrait;
   private PImage[] idleCycle = new PImage[2];
   
-  public Fighter(String name, int hp, int atk, int mana){
+  public Fighter(String name, int hp, int atk, int speed, int mana){
     this.name = name;
     maxHP = hp;
     this.hp = hp;
     this.atk = atk;
+    this.speed = speed;
     maxMana = mana;
     this.mana = mana;
     this.xp = 0;
@@ -40,6 +42,10 @@ abstract class Fighter{
   
   public int getAtk(){
     return atk;
+  }
+  
+  public int getSpeed(){
+    return speed;
   }
   
   public int getMana(){
@@ -69,6 +75,10 @@ abstract class Fighter{
   
   public void setAtk(int attack){
     atk = attack;
+  }
+  
+  public void setSpeed(int spd){
+    speed = spd;
   }
   
   public void setMana(int m){
