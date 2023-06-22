@@ -17,6 +17,9 @@ class Combat{
   PImage itemButton;
   PImage runButton;
   
+  PImage moveIcon;
+  PImage moveIconSel;
+  
   ArrayList<Fighter> party;
   ArrayList<Fighter> enemies;
   ArrayList<Fighter> turnOrder;
@@ -25,7 +28,6 @@ class Combat{
   int turn;
   int option;
   
-  boolean top;
   boolean menu;
     boolean attack;
       boolean target;
@@ -46,6 +48,9 @@ class Combat{
     healthBar = loadImage("battle/"+"healthbar.png");
     manaBar = loadImage("battle/"+"manabar.png");
     
+    moveIcon = loadImage("battle/"+"moveicon.png");
+    moveIconSel = loadImage("battle/"+"moveiconsel.png");
+    
     cycle = 0;
     sel = loadImage("battle/"+"selHand.png");
     selTwo = loadImage("battle/"+"selHand2.png");
@@ -60,7 +65,6 @@ class Combat{
     
     option = 0;
     
-    top = true;
     menu = true;
       attack = false;
         target = false;
@@ -69,13 +73,11 @@ class Combat{
   
   void keyPressedCombat(){
     if (keyCode == UP){
-      top = true;
       if (target){
       option -=1;
       }
     }
     if (keyCode == DOWN){
-      top = false;
       if (target){
       option +=1;
       }
@@ -256,43 +258,21 @@ class Combat{
    void drawAttacks(){
      fill(0);
      rect(0, 650, 1200, 250);
-     
-     if (option == 0 && top){
-       fill(30);
-     }else{
-     fill(128);
+      
+     for (int i = 0; i < 4; i +=1){
+       if (option == i){
+         image(moveIconSel, (i * 300), 720);
+       }else{
+         image(moveIcon, (i * 300), 720);
+       }
      }
-     rect(110, 690, 400, 80); 
-     
-     if (option == 1 && top){
-       fill(30);
-     }else{
-     fill(128);
-     }
-     rect(590, 690, 400, 80); 
-     
-     if (option == 0 && !top){
-       fill(30);
-     }else{
-     fill(128);
-     }
-     rect(110, 810, 400, 80); 
-     
-     if (option == 1 && !top){
-       fill(30);
-     }else{
-     fill(128);
-     }
-     rect(590, 810, 400, 80); 
-   
      
      textSize(40);
      fill(255);
-     
-     text("Move1", 255, 745);
-     text("Move2", 725, 745);  
-     text("Move3", 255, 865);
-     text("Move4", 725, 865);
+     text("Move1", 80, 800);
+     text("Move2", 370, 800);  
+     text("Move3", 680, 800);
+     text("Move4", 960, 800);
    }
    
    void drawItems(){
@@ -388,8 +368,8 @@ class Combat{
     }
     
     if (attack){
-      if (option > 1){
-        option = 1;
+      if (option > 3){
+        option = 3;
       }
       if (option < 0){
         option = 0;
@@ -408,7 +388,6 @@ class Combat{
    }
    
    void optionReset(){
-   top = true;
    option = 0;
    }
   
