@@ -60,22 +60,33 @@ void setup() {
   //TESTING CODE
   fight = false;
   Vishu one = new Vishu();
-  one.setHP(10);
-  one.setMana(14);
   Vishu two = new Vishu();
   Vishu three = new Vishu();
+  
+  one.setSpeed(1);
+  two.setSpeed(2);
+  three.setSpeed(3);
+  
   ArrayList<Fighter> party = new ArrayList<Fighter>();
   party.add(one);
   party.add(two);
   party.add(three);
   
+  
   Vishu four = new Vishu();
   Vishu five = new Vishu();
   Vishu six = new Vishu();
+  
+  four.setSpeed(4);
+  five.setSpeed(5);
+  six.setSpeed(6);
+  
   ArrayList<Fighter> enemies = new ArrayList<Fighter>();
   enemies.add(four);
   enemies.add(five);
   enemies.add(six);
+  
+  
   testing = new Combat(party, enemies);
 }
 
