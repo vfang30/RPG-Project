@@ -13,6 +13,7 @@ class Combat{
   float cycle;
   
   PImage atkButton;
+  PImage rechargeButton;
   PImage itemButton;
   PImage runButton;
   
@@ -51,6 +52,7 @@ class Combat{
     selCycle[1] = selTwo;
     
     atkButton = loadImage("battle/"+"attack.png");
+    rechargeButton = loadImage("battle/"+"recharge.png");
     itemButton = loadImage("battle/"+"item.png");
     runButton = loadImage("battle/"+"run.png");
     
@@ -179,25 +181,33 @@ class Combat{
      
      
      if (option == 0){
-     image(selCycle[(int)cycle], 115, 495 + (int)cycle * 20);
+     image(selCycle[(int)cycle], 105, 495 + (int)cycle * 20);
      image(atkButton, 0, 587);
      text("ATTACK", 75, 640);
-     
      }else{
      image(atkButton, 0, 612);
      text("ATTACK", 75, 665);
      }
      
      if (option == 1){
-     image(selCycle[(int)cycle], 600, 495 + (int)cycle * 20);
-     image(itemButton, 492, 587);
-     text("ITEMS", 572, 640);
+     image(selCycle[(int)cycle], 410, 495 + (int)cycle * 20);
+     image(rechargeButton, 310, 587);
+     text("RECHARGE", 375, 640);
      }else{
-     image(itemButton, 492, 612);
-     text("ITEMS", 572, 665);
+     image(rechargeButton, 310, 612);
+     text("RECHARGE", 375, 665);
      }
      
      if (option == 2){
+     image(selCycle[(int)cycle], 720, 495 + (int)cycle * 20);
+     image(itemButton, 632, 587);
+     text("ITEMS", 712, 640);
+     }else{
+     image(itemButton, 632, 612);
+     text("ITEMS", 712, 665);
+     }
+     
+     if (option == 3){
      image(selCycle[(int)cycle], 1050, 495 + (int)cycle * 20);
      image(runButton, 944, 587);
      text("RUN", 1050, 640);
@@ -334,8 +344,8 @@ class Combat{
   
    void optionHover(){
      if (menu){
-      if (option > 2){
-        option = 2;
+      if (option > 3){
+        option = 3;
       }
       if (option < 0){
         option = 0;
