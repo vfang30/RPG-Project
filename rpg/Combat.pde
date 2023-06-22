@@ -125,6 +125,7 @@ class Combat{
   void run(){
     
     turnOrder();
+    turnTest();
     
     cycle += 0.08;
     if ((int)cycle > 1){
@@ -166,16 +167,23 @@ class Combat{
      }
      for (int keyIndex = 1; keyIndex < turnOrder.size(); keyIndex +=1){
        int prev = keyIndex - 1;
-       Fighter prevF = turnOrder.get(prev);
        Fighter compare = turnOrder.get(keyIndex);
        int keySpeed = compare.getSpeed();
        while (prev > -1 && keySpeed > turnOrder.get(prev).getSpeed()){
+         Fighter prevF = turnOrder.get(prev);
          turnOrder.set(prev + 1, prevF);
          prev -=1;
        }
        turnOrder.set(prev + 1, compare);
      }
-     
+   }
+   
+   void turnTest(){
+     String res = "";
+     for (int i = 0; i < turnOrder.size(); i +=1){
+       res += " " + turnOrder.get(i).getSpeed();
+     }
+     println(res);
    }
    
    void drawMenu(){
