@@ -363,7 +363,7 @@ class Combat{
      image(temp.attackCycle[(int)attackCycle], 150, (num * 130) + 120);
      textSize(30);
      text(atkMsg, 100, 700);
-     attackCycle += 0.1;
+     attackCycle += 0.15;
      if ((int)attackCycle > 7){
        attack = false;
        menu = true;
