@@ -67,10 +67,10 @@ void setup() {
   two.setSpeed(2);
   three.setSpeed(3);
   
-  ArrayList<Fighter> party = new ArrayList<Fighter>();
-  party.add(one);
-  party.add(two);
-  party.add(three);
+  ArrayList<Fighter> enemies = new ArrayList<Fighter>();
+  enemies.add(one);
+  enemies.add(two);
+  enemies.add(three);
   
   
   Vishu four = new Vishu();
@@ -81,10 +81,11 @@ void setup() {
   five.setSpeed(5);
   six.setSpeed(6);
   
-  ArrayList<Fighter> enemies = new ArrayList<Fighter>();
-  enemies.add(four);
-  enemies.add(five);
-  enemies.add(six);
+  ArrayList<Fighter> party = new ArrayList<Fighter>();
+  party.add(four);
+  party.add(five);
+  party.add(six);
+  
   
   
   testing = new Combat(party, enemies);

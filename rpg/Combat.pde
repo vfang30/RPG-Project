@@ -29,9 +29,12 @@ class Combat{
   int option;
   
   boolean menu;
-    boolean attack;
+    boolean moves;
       boolean target;
       int targetTeamSize;
+      boolean attack;
+      float attackCycle;
+      String atkMsg;
     boolean item;
 
   
@@ -66,8 +69,10 @@ class Combat{
     option = 0;
     
     menu = true;
-      attack = false;
+      moves = false;
         target = false;
+        attack = false;
+        attackCycle = 0;
       item = false;
   }
   
@@ -93,27 +98,31 @@ class Combat{
       if (option == 0 && menu){
       optionReset();
       menu = false;
-      attack = true;
+      moves = true;
+      
       }else if (option == 2 && menu) {
       optionReset();
       menu = false;
       item = true;
-      }else if (attack) {
+      
+      }else if (moves) {
       optionReset();
-      attack = false;
+      moves = false;
       target = true;
+      
       targetTeamSize = enemies.size();
       }else if (target)  {
       target = false;
-      menu = true;
+      atkMsg = current.attack(enemies.get(option));
+      attack = true;
       turn +=1;
       optionReset();
       }      
     }
     if (keyCode == 'Z'){
-      if (attack){
+      if (moves){
         optionReset();
-        attack = false;
+        moves = false;
         menu = true;
       }
       if (item){
@@ -124,7 +133,7 @@ class Combat{
       if (target){
         optionReset();
         target = false;
-        attack = true;
+        moves = true;
       }
     }
   }
@@ -148,12 +157,18 @@ class Combat{
       enemyAttack();
     }
     
+    if (attack){
+      drawAttack();
+    }
+    
     optionHover();
     drawMenu();
 
 
     for (int i = 0; i < party.size(); i +=1){
-      image(party.get(i).idleCycle[(int)idle], 150, (i * 130) + 120);
+      if (i != ((turn - 1) % (party.size() + enemies.size())) || !attack){
+          image(party.get(i).idleCycle[(int)idle], 150, (i * 130) + 120);
+      }
     }
     for (int i = 0; i < enemies.size(); i +=1){
       image(enemies.get(i).idleCycle[(int)idle], 900, (i * 130) + 120);
@@ -217,8 +232,8 @@ class Combat{
       drawOptions();
     }
      
-      if (attack){
-       drawAttacks();
+      if (moves){
+       drawMoves();
       }
       
         if (target){
@@ -275,7 +290,7 @@ class Combat{
      
    }
    
-   void drawAttacks(){
+   void drawMoves(){
      fill(0);
      rect(0, 650, 1200, 250);
       
@@ -342,6 +357,20 @@ class Combat{
      }
    }
    
+   void drawAttack(){
+     Vishu temp = (Vishu)current;
+     int num = ((turn - 1) % (party.size() + enemies.size()));
+     image(temp.attackCycle[(int)attackCycle], 150, (num * 130) + 120);
+     textSize(30);
+     text(atkMsg, 100, 700);
+     attackCycle += 0.1;
+     if ((int)attackCycle > 7){
+       attack = false;
+       menu = true;
+       attackCycle = 0;
+     }
+   }
+   
    void drawInfo(){
      
      image(battleInfo, 0, 700);
@@ -349,8 +378,10 @@ class Combat{
      for (int i = 0; i < party.size(); i +=1){
       
        //Health
+       if (party.get(i).getHP() > 0){
        healthBar.resize((int)((float)party.get(i).getHP()/party.get(i).getMaxHP() * 191) , 7);
        image(healthBar, (i * 400) + 181, 782);
+       }
        
        textSize(13);
        text(party.get(i).getHP() + " / " + party.get(i).getMaxHP() + " HP" , (i * 400) + 190, 810);
@@ -388,7 +419,7 @@ class Combat{
       }
     }
     
-    if (attack){
+    if (moves){
       if (option > 3){
         option = 3;
       }

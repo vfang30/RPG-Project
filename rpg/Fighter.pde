@@ -105,5 +105,8 @@ abstract class Fighter{
   
   public void applyDamage(int amount){
     this.hp -= amount;
+    if (this.hp < 0){
+    this.hp = 0;
+    }
   }
 }
