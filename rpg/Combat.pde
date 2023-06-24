@@ -358,9 +358,8 @@ class Combat{
    }
    
    void drawAttack(){
-     Vishu temp = (Vishu)current;
      int num = ((turn - 1) % (party.size() + enemies.size()));
-     image(temp.attackCycle[(int)attackCycle], 150, (num * 130) + 120);
+     image(current.atkCycle[(int)attackCycle], 150, (num * 130) + 120);
      textSize(30);
      text(atkMsg, 100, 700);
      attackCycle += 0.15;

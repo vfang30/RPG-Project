@@ -2,7 +2,6 @@
 class Vishu extends Fighter{
   String attackPath = sketchPath("data\\attack");
   String[] attack = listFileNames(attackPath);
-  PImage[] attackCycle = new PImage[8];
   
   public Vishu(){
     super("Vishu", 20, 5, 10, 20);
@@ -18,7 +17,7 @@ class Vishu extends Fighter{
     
     for (int i = 0; i < 8; i +=1){
       PImage image = loadImage("attack/"+attack[i]);
-      attackCycle[i] = image;
+      super.atkCycle[i] = image;
     }
 
   }
