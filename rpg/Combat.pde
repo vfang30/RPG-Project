@@ -171,7 +171,12 @@ class Combat{
       }
     }
     for (int i = 0; i < enemies.size(); i +=1){
+      if (enemies.get(i).getHP() > 0){
       image(enemies.get(i).idleCycle[(int)idle], 900, (i * 130) + 120);
+      }else{
+      enemies.remove(i);
+      i -=1;
+      }
     }
   }
     
@@ -319,6 +324,8 @@ class Combat{
      fill(0);
      rect(0, 650, 1200, 250);
      
+     int temp = 0;
+     
        ////Option Highlighter
        noStroke();
        fill(255, 207, 64);
@@ -339,20 +346,21 @@ class Combat{
        if (targets.get(i).getHP() > 0){
        //Health
        healthBar.resize((int)((float)targets.get(i).getHP()/targets.get(i).getMaxHP() * 300) , 35);
-       image(healthBar, 400, (i * 60) + 686);
+       image(healthBar, 400, (temp * 60) + 686);
        
        //Mana
        manaBar.resize((int)((float)targets.get(i).getMana()/targets.get(i).getMaxMana() * 300) , 35);
-       image(manaBar, 750, (i * 60) + 686);
+       image(manaBar, 750, (temp * 60) + 686);
        
        //Portrait
        PImage portrait = party.get(i).getPortrait().copy();
        portrait.resize(35, 0);
-       image(portrait, 100, (i * 60) + 686);
+       image(portrait, 100, (temp * 60) + 686);
        
        fill(255);
        textSize(25);
-       text(party.get(i).getName(), 220, (i * 60) + 715);
+       text(party.get(i).getName(), 220, (temp * 60) + 715);
+       temp +=1;
        }
      }
    }

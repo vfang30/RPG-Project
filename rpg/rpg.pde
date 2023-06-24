@@ -67,6 +67,8 @@ void setup() {
   two.setSpeed(2);
   three.setSpeed(3);
   
+  one.setHP(10);
+  
   ArrayList<Fighter> enemies = new ArrayList<Fighter>();
   enemies.add(one);
   enemies.add(two);
