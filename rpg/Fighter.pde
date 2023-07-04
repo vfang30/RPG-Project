@@ -12,6 +12,8 @@ abstract class Fighter{
   private PImage portrait;
   private PImage[] idleCycle = new PImage[2];
   private PImage[] atkCycle = new PImage[8];
+  private boolean attack;
+  private int pos;
   
   public Fighter(String name, int hp, int atk, int speed, int mana){
     this.name = name;
@@ -23,6 +25,7 @@ abstract class Fighter{
     this.mana = mana;
     this.xp = 0;
     this.level = 1;
+    attack = false;
   }
   
   public Fighter(){

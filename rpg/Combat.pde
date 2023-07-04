@@ -77,6 +77,7 @@ class Combat{
   }
   
   void keyPressedCombat(){
+    if (!enemyTurn() && !attack){
     if (keyCode == UP){
       if (target){
       option -=1;
@@ -113,10 +114,8 @@ class Combat{
       targetTeamSize = enemies.size();
       }else if (target)  {
       target = false;
-      atkMsg = current.attack(enemies.get(option));
       attack = true;
-      turn +=1;
-      optionReset();
+      menu = true;
       }      
     }
     if (keyCode == 'Z'){
@@ -137,6 +136,7 @@ class Combat{
       }
     }
   }
+ }
   
   
   void run(){
@@ -147,36 +147,47 @@ class Combat{
     textSize(50);
     fill(255);
     text(current.getSpeed(), 400, 400);
+    text(turn, 500, 400);
     
     cycle += 0.08;
     if ((int)cycle > 1){
     cycle = 0;
     }
     
+    optionHover();
+    drawMenu();
+    
     if (enemyTurn()){
-      enemyAttack();
+      drawAttack();
     }
     
     if (attack){
       drawAttack();
     }
     
-    optionHover();
-    drawMenu();
 
 
     for (int i = 0; i < party.size(); i +=1){
-      if (i != ((turn - 1) % (party.size() + enemies.size())) || !attack){
+      party.get(i).pos = i;
+      if (!party.get(i).attack){
           image(party.get(i).idleCycle[(int)idle], 150, (i * 130) + 120);
       }
     }
     for (int i = 0; i < enemies.size(); i +=1){
       if (enemies.get(i).getHP() > 0){
+        enemies.get(i).pos = i;
+        if (!enemies.get(i).attack){
       image(enemies.get(i).idleCycle[(int)idle], 900, (i * 130) + 120);
+        }
       }else{
       enemies.remove(i);
       i -=1;
       }
+    }
+    
+    if (!aliveParty(enemies)){
+    textSize(50);
+    text("enemies dead", 400, 200);
     }
   }
     
@@ -225,8 +236,8 @@ class Combat{
    
    void enemyAttack(){
      int target = (int)random(party.size());
-     println(current.attack(party.get(target)));
-     turn +=1;
+     atkMsg = current.attack(party.get(target));
+     println(atkMsg);
    }
    
    
@@ -234,7 +245,10 @@ class Combat{
      
     if (menu){
       drawInfo();
-      drawOptions();
+      
+      if (!attack && !enemyTurn()){
+        drawOptions();
+      }
     }
      
       if (moves){
@@ -353,28 +367,42 @@ class Combat{
        image(manaBar, 750, (temp * 60) + 686);
        
        //Portrait
-       PImage portrait = party.get(i).getPortrait().copy();
+       PImage portrait = targets.get(i).getPortrait().copy();
        portrait.resize(35, 0);
        image(portrait, 100, (temp * 60) + 686);
        
        fill(255);
        textSize(25);
-       text(party.get(i).getName(), 220, (temp * 60) + 715);
+       text(targets.get(i).getName(), 220, (temp * 60) + 715);
        temp +=1;
        }
      }
    }
    
    void drawAttack(){
-     int num = ((turn - 1) % (party.size() + enemies.size()));
-     image(current.atkCycle[(int)attackCycle], 150, (num * 130) + 120);
-     textSize(30);
-     text(atkMsg, 100, 700);
+     current.attack = true;
+     if (!enemyTurn()){
+     image(current.atkCycle[(int)attackCycle], 150, (current.pos * 130) + 120);
+     }
+     if (enemyTurn()){
+     image(current.atkCycle[(int)attackCycle], 900, (current.pos * 130) + 120);
+     }
      attackCycle += 0.15;
      if ((int)attackCycle > 7){
+       attackCycle = 0;
+       turn +=1;
+       current.attack = false;
+       
+       if (!enemyTurn()){
+        atkMsg = current.attack(enemies.get(option));
+        optionReset();
+       }
+       
+       if (enemyTurn()){
+         enemyAttack();
+       }
        attack = false;
        menu = true;
-       attackCycle = 0;
      }
    }
    
