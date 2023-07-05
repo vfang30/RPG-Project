@@ -40,3 +40,10 @@
 * Added animation for option select.
 * Added picture for turn order on top of screen.
 * Added an arraylist of fighters to keep track of turn order, fighters are sorted using insertion sort based on speed.
+
+## Didn't keep track of dates for these updates
+
+### Combat
+* Added attack animation for Vishu.
+* Enemies can attack and die.
+* Fixed bug where turn order would get messed up whenever the number of combatants changes (ex when someone dies).
