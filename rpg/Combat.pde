@@ -24,6 +24,7 @@ class Combat{
   ArrayList<Fighter> enemies;
   ArrayList<Fighter> turnOrder;
   Fighter current;
+  int cur;
   
   int turn;
   int option;
@@ -45,8 +46,9 @@ class Combat{
     background = loadImage("battle/"+"battlebackground.png");
     background.resize(1200, 900);
     turnDisplay = loadImage("battle/"+"turnOrder.png");
+    cur = 0;
     turn = 1;
-    
+
     battleInfo = loadImage("battle/"+"battleinfo.png");
     healthBar = loadImage("battle/"+"healthbar.png");
     manaBar = loadImage("battle/"+"manabar.png");
@@ -143,11 +145,15 @@ class Combat{
     
     image(background, 0, 0);
     turnOrder();
-    current = turnOrder.get((turn - 1) % (party.size() + enemies.size()));
+    if (cur >= turnOrder.size()){
+    cur = 0;
+    }
+    current = turnOrder.get(cur);
     textSize(50);
     fill(255);
     text(current.getSpeed(), 400, 400);
     text(turn, 500, 400);
+    text(turnOrder.size(), 600, 400);
     
     cycle += 0.08;
     if ((int)cycle > 1){
@@ -391,6 +397,7 @@ class Combat{
      if ((int)attackCycle > 7){
        attackCycle = 0;
        turn +=1;
+       cur +=1;
        current.attack = false;
        
        if (!enemyTurn()){
