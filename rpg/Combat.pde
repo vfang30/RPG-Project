@@ -32,7 +32,6 @@ class Combat{
   boolean menu;
     boolean moves;
       boolean target;
-      int targetTeamSize;
       boolean attack;
       float attackCycle;
       String atkMsg;
@@ -113,7 +112,6 @@ class Combat{
       moves = false;
       target = true;
       
-      targetTeamSize = enemies.size();
       }else if (target)  {
       target = false;
       attack = true;
@@ -471,7 +469,7 @@ class Combat{
     }
     
     if (target){
-      if (option > targetTeamSize - 1){
+      if (option > enemies.size() - 1){
       option = targetTeamSize - 1;
       }
       if (option < 0){
