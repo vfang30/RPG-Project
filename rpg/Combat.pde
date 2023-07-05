@@ -470,7 +470,7 @@ class Combat{
     
     if (target){
       if (option > enemies.size() - 1){
-      option = targetTeamSize - 1;
+      option = enemies.size() - 1;
       }
       if (option < 0){
       option = 0;
