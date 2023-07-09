@@ -8,7 +8,7 @@ abstract class Fighter{
   private int baseMANA, mana, maxMana;
   private int xp;
   private int level;
-  private Move[] moveList = new Move[2];
+  private Move[] moveList = new Move[4];
   
   private PImage avatar;
   private PImage avatarIdle;
