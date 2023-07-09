@@ -3,6 +3,7 @@ abstract class Fighter{
   private String name;
   private int baseHP, hp, maxHP;
   private int baseATK, atk;
+  private int baseDEF, def;
   private int baseSPEED, speed;
   private int baseMANA, mana, maxMana;
   private int xp;
@@ -17,19 +18,21 @@ abstract class Fighter{
   private boolean attack;
   private int pos;
   
-  public Fighter(String name, int hp, int atk, int mana, int speed){
+  public Fighter(String name, int hp, int atk, int def, int mana, int speed){
     this.xp = 0;
     this.level = 1;
     
     this.name = name;
     baseHP = hp;
     baseATK = atk;
+    baseDEF = def;
     baseSPEED = speed;
     baseMANA = mana;
     
     this.hp = calcStat(baseHP);
     maxHP = this.hp;
     this.atk = calcOther(baseATK);
+    this.def = calcOther(baseDEF);
     this.speed = calcOther(baseSPEED);
     this.mana = calcStat(baseMANA);
     maxMana = this.mana;
@@ -47,6 +50,15 @@ abstract class Fighter{
   
   public int calcOther(int baseStat){ //calc for all other stats
     return (int)(((2 * baseStat * level)/25) + 5);
+  }
+  
+  //damage calc
+  public int damage(Move move, Fighter other){
+    if (move.accuracy < random(101)){
+    return 0;
+    }else{
+      return (int)( (atk/other.def) * move.basePower * ( (2 * level + 10)/62.5) * random(0.85, 1));
+    }
   }
   
   //get methods
