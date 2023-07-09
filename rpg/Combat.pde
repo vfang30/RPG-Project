@@ -45,7 +45,15 @@ class Combat{
 
   public Combat(ArrayList<Fighter> party, ArrayList<Fighter> enemies){
     this.party = party;
+    for (int i = 0; i < party.size(); i +=1){
+      party.get(i).xPos = 150;
+      party.get(i).yPos = i;
+    }
     this.enemies = enemies;
+     for (int i = 0; i < enemies.size(); i +=1){
+      enemies.get(i).xPos = 900;
+      enemies.get(i).yPos = i;
+    }
 
     background = loadImage("battle/"+"battlebackground.png");
     background.resize(1200, 900);
@@ -207,10 +215,8 @@ class Combat{
 
     for (int i = 0; i < party.size(); i +=1){
       if (party.get(i).getHP() > 0){
-        party.get(i).yPos = i;
-        party.get(i).xPos = 150;
         if (!party.get(i).attack){
-          image(party.get(i).idleCycle[(int)idle], 150, (i * 130) + 120);
+          image(party.get(i).idleCycle[(int)idle], party.get(i).xPos, (party.get(i).yPos * 130) + 120);
         }
       }else{
       party.remove(i);
@@ -219,10 +225,8 @@ class Combat{
     }
     for (int i = 0; i < enemies.size(); i +=1){
       if (enemies.get(i).getHP() > 0){
-        enemies.get(i).yPos = i;
-        enemies.get(i).xPos = 900;
         if (!enemies.get(i).attack){
-          image(enemies.get(i).idleCycle[(int)idle], 900, (i * 130) + 120);
+          image(enemies.get(i).idleCycle[(int)idle], enemies.get(i).xPos, (enemies.get(i).yPos * 130) + 120);
         }
       }else{
       enemies.remove(i);
@@ -448,13 +452,13 @@ class Combat{
    }
    
    void drawDamage(){
-     dmgCycle += 0.2;
+     dmgCycle += 0.1;
    
      fill(255, 0, 0);
-     textSize(80);
-     text(dmg, 600, 2 * 130 + 120 + dmgCycle * 50);
-     if ((int)dmgCycle > 3){
-       attackCycle = 0;
+     textSize(40);
+     text(dmg, selected.xPos - 50, selected.yPos * 130 + 120 + (dmgCycle * 50));
+     if ((int)dmgCycle > 2){
+       dmgCycle = 0;
        dmgStep = false;
        menu = true;
      }
