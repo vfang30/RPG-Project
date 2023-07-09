@@ -47,3 +47,14 @@
 * Added attack animation for Vishu.
 * Enemies can attack and die.
 * Fixed bug where turn order would get messed up whenever the number of combatants changes (ex when someone dies).
+
+## 7/9/23
+
+### Fighter
+* Implemented base stats and formulas to calculate stats.
+
+### Moves
+* Started work on making moves, created constructor.
+
+### Other
+* Created a spreadsheet to keep track of character data (stats and moves at each level).
