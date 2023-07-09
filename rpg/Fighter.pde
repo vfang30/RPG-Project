@@ -54,15 +54,15 @@ abstract class Fighter{
   }
   
   //damage calc
-  public int damage(Move move, Fighter other){
+  public String damage(Move move, Fighter other){
     int damage = 0;
     if (move.accuracy < random(101)){
-    other.applyDamage(damage);
+    return "Miss";
     }else{
-      damage = (int)( (atk/other.def) * move.basePower * ( (2 * level + 10)/62.5) * random(0.85, 1));
+      damage = (int)( ((atk/other.def) * move.basePower * ( (2 * level + 10)/62.5) * random(0.85, 1)) + 2);
       other.applyDamage(damage);
     }
-    return damage;
+    return "" +  damage;
   }
   
   //get methods

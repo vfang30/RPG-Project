@@ -37,7 +37,7 @@ class Combat{
       boolean attack;
       float attackCycle;
       String atkMsg;
-      int dmg;
+      String dmg;
       boolean dmgStep;
       float dmgCycle;
     boolean item;
@@ -452,12 +452,14 @@ class Combat{
    }
    
    void drawDamage(){
-     dmgCycle += 0.1;
+     dmgCycle += 0.15;
    
      fill(255, 0, 0);
-     textSize(40);
-     text(dmg, selected.xPos - 50, selected.yPos * 130 + 120 + (dmgCycle * 50));
-     if ((int)dmgCycle > 2){
+     textSize(50);
+     if ((int)dmgCycle < 2){
+       text(dmg, selected.xPos - 50, selected.yPos * 130 + 120 + (dmgCycle * 50));
+     }
+     if ((int)dmgCycle > 3){
        dmgCycle = 0;
        dmgStep = false;
        menu = true;
