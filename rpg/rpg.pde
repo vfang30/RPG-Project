@@ -84,7 +84,7 @@ void setup() {
   ArrayList<Fighter> party = new ArrayList<Fighter>();
   party.add(four);
   party.add(five);
-  party.add(six);
+  //party.add(six);
   
   
   

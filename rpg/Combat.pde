@@ -142,6 +142,12 @@ class Combat{
   void run(){
     
     image(background, 0, 0);
+    
+    if (!aliveParty(enemies) || !aliveParty(party)){
+    textSize(50);
+    text("fight end", 400, 200);
+    }else{
+    
     turnOrder();
     if (cur >= turnOrder.size()){
     cur = 0;
@@ -168,20 +174,26 @@ class Combat{
     if (attack){
       drawAttack();
     }
+    }
     
 
 
     for (int i = 0; i < party.size(); i +=1){
-      party.get(i).pos = i;
-      if (!party.get(i).attack){
+      if (party.get(i).getHP() > 0){
+        party.get(i).pos = i;
+        if (!party.get(i).attack){
           image(party.get(i).idleCycle[(int)idle], 150, (i * 130) + 120);
+        }
+      }else{
+      party.remove(i);
+      i -=1;
       }
     }
     for (int i = 0; i < enemies.size(); i +=1){
       if (enemies.get(i).getHP() > 0){
         enemies.get(i).pos = i;
         if (!enemies.get(i).attack){
-      image(enemies.get(i).idleCycle[(int)idle], 900, (i * 130) + 120);
+          image(enemies.get(i).idleCycle[(int)idle], 900, (i * 130) + 120);
         }
       }else{
       enemies.remove(i);
@@ -189,10 +201,7 @@ class Combat{
       }
     }
     
-    if (!aliveParty(enemies)){
-    textSize(50);
-    text("enemies dead", 400, 200);
-    }
+
   }
     
    boolean aliveParty(ArrayList<Fighter> squad){
