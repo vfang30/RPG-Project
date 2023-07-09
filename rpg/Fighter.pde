@@ -1,12 +1,14 @@
 import java.util.*;
 abstract class Fighter{
   private String name;
-  private int hp, maxHP;
-  private int atk;
-  private int speed;
-  private int mana, maxMana;
+  private int baseHP, hp, maxHP;
+  private int baseATK, atk;
+  private int baseSPEED, speed;
+  private int baseMANA, mana, maxMana;
   private int xp;
   private int level;
+  private Move[] moveList = new Move[2];
+  
   private PImage avatar;
   private PImage avatarIdle;
   private PImage portrait;
@@ -15,20 +17,36 @@ abstract class Fighter{
   private boolean attack;
   private int pos;
   
-  public Fighter(String name, int hp, int atk, int speed, int mana){
-    this.name = name;
-    maxHP = hp;
-    this.hp = hp;
-    this.atk = atk;
-    this.speed = speed;
-    maxMana = mana;
-    this.mana = mana;
+  public Fighter(String name, int hp, int atk, int mana, int speed){
     this.xp = 0;
     this.level = 1;
+    
+    this.name = name;
+    baseHP = hp;
+    baseATK = atk;
+    baseSPEED = speed;
+    baseMANA = mana;
+    
+    this.hp = calcStat(baseHP);
+    maxHP = this.hp;
+    this.atk = calcOther(baseATK);
+    this.speed = calcOther(baseSPEED);
+    this.mana = calcStat(baseMANA);
+    maxMana = this.mana;
+    
     attack = false;
   }
   
   public Fighter(){
+  }
+  
+  //stat calcs
+  public int calcStat(int baseStat){  //hp and mana calc
+    return (int)(((2 * baseStat * level)/25) + level + 10);
+  }
+  
+  public int calcOther(int baseStat){ //calc for all other stats
+    return (int)(((2 * baseStat * level)/25) + 5);
   }
   
   //get methods

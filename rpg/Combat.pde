@@ -157,7 +157,7 @@ class Combat{
     fill(255);
     text(current.getSpeed(), 400, 400);
     text(turn, 500, 400);
-    text(turnOrder.size(), 600, 400);
+    text(current.getAtk(), 600, 400);
     
     cycle += 0.08;
     if ((int)cycle > 1){

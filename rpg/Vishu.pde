@@ -4,7 +4,7 @@ class Vishu extends Fighter{
   String[] attack = listFileNames(attackPath);
   
   public Vishu(){
-    super("Vishu", 20, 5, 10, 20);
+    super("Vishu", 90, 80, 80, 100);
     super.avatar = loadImage("idle/normal/"+"character.png");
     super.avatarIdle = loadImage("idle/normal/"+"characteridle.png");
     super.portrait = loadImage("portraits/"+"Vishuportrait.png");
