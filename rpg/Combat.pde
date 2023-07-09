@@ -24,6 +24,7 @@ class Combat{
   ArrayList<Fighter> enemies;
   ArrayList<Fighter> turnOrder;
   Fighter current;
+  Move selMove;
   int cur;
   
   int turn;
@@ -79,64 +80,70 @@ class Combat{
   
   void keyPressedCombat(){
     if (!enemyTurn() && !attack){
-    if (keyCode == UP){
-      if (target){
-      option -=1;
+    
+      if (keyCode == UP){
+        if (target){
+        option -=1;
+        }
       }
-    }
-    if (keyCode == DOWN){
-      if (target){
-      option +=1;
+      if (keyCode == DOWN){
+        if (target){
+        option +=1;
+        }
       }
-    }
-    if (keyCode == LEFT && !target){
-      option -=1;
-    }
-    if (keyCode == RIGHT && !target){
-      option +=1;
-    }
-    if (keyCode == 'X'){
+      if (keyCode == LEFT && !target){
+        option -=1;
+      }
+      if (keyCode == RIGHT && !target){
+        option +=1;
+        if (moves){
+          if (current.moveList[option] == null)
+          option -=1;
+        }
+      }
+      if (keyCode == 'X'){
       
-      if (option == 0 && menu){
-      optionReset();
-      menu = false;
-      moves = true;
-      
-      }else if (option == 2 && menu) {
-      optionReset();
-      menu = false;
-      item = true;
-      
-      }else if (moves) {
-      optionReset();
-      moves = false;
-      target = true;
-      
-      }else if (target)  {
-      target = false;
-      attack = true;
-      menu = true;
-      }      
-    }
-    if (keyCode == 'Z'){
-      if (moves){
+        if (option == 0 && menu){
         optionReset();
-        moves = false;
-        menu = true;
-      }
-      if (item){
-        optionReset();
-        item = false;
-        menu = true;
-      }
-      if (target){
-        optionReset();
-        target = false;
+        menu = false;
         moves = true;
+      
+        }else if (option == 2 && menu) {
+        optionReset();
+        menu = false;
+        item = true;
+      
+        }else if (moves && current.moveList[option].mana <= current.mana) {
+        optionReset();
+        selMove = current.moveList[option];
+        moves = false;
+        target = true;
+      
+        }else if (target)  {
+        target = false;
+        attack = true;
+        menu = true;
+        }      
+      }
+      if (keyCode == 'Z'){
+        if (moves){
+          optionReset();
+          moves = false;
+          menu = true;
+        }
+        if (item){
+          optionReset();
+          item = false;
+          menu = true;
+        }
+        if (target){
+          optionReset();
+          target = false;
+          moves = true;
+        }
       }
     }
-  }
- }
+   }
   
   
   void run(){
@@ -157,7 +164,9 @@ class Combat{
     fill(255);
     text(current.getSpeed(), 400, 400);
     text(turn, 500, 400);
-    text(current.getAtk(), 600, 400);
+    if (selMove != null){
+    text(selMove.name, 600, 400);
+    }
     
     cycle += 0.08;
     if ((int)cycle > 1){
@@ -326,20 +335,19 @@ class Combat{
      fill(0);
      rect(0, 650, 1200, 250);
       
+     textSize(40);
+     fill(255);
+      
      for (int i = 0; i < 4; i +=1){
        if (option == i){
          image(moveIconSel, (i * 300), 720);
        }else{
          image(moveIcon, (i * 300), 720);
        }
+       if (current.moveList[i] != null){
+         text(current.moveList[i].name, (i * 290) + 80, 800);
+       }
      }
-     
-     textSize(40);
-     fill(255);
-     text("Move1", 80, 800);
-     text("Move2", 370, 800);  
-     text("Move3", 680, 800);
-     text("Move4", 960, 800);
    }
    
    void drawItems(){
@@ -408,7 +416,8 @@ class Combat{
        current.attack = false;
        
        if (!enemyTurn()){
-        atkMsg = current.attack(enemies.get(option));
+        current.damage(selMove, enemies.get(option));
+        current.mana -= selMove.mana;
         optionReset();
        }
        

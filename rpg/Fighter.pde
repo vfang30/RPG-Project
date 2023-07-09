@@ -53,11 +53,12 @@ abstract class Fighter{
   }
   
   //damage calc
-  public int damage(Move move, Fighter other){
+  public void damage(Move move, Fighter other){
+    int damage = 0;
     if (move.accuracy < random(101)){
-    return 0;
+    other.applyDamage(damage);
     }else{
-      return (int)( (atk/other.def) * move.basePower * ( (2 * level + 10)/62.5) * random(0.85, 1));
+      other.applyDamage( (int)( (atk/other.def) * move.basePower * ( (2 * level + 10)/62.5) * random(0.85, 1)));
     }
   }
   
