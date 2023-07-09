@@ -16,7 +16,8 @@ abstract class Fighter{
   private PImage[] idleCycle = new PImage[2];
   private PImage[] atkCycle = new PImage[8];
   private boolean attack;
-  private int pos;
+  private int yPos;
+  private int xPos;
   
   public Fighter(String name, int hp, int atk, int def, int mana, int speed){
     this.xp = 0;
@@ -53,13 +54,15 @@ abstract class Fighter{
   }
   
   //damage calc
-  public void damage(Move move, Fighter other){
+  public int damage(Move move, Fighter other){
     int damage = 0;
     if (move.accuracy < random(101)){
     other.applyDamage(damage);
     }else{
-      other.applyDamage( (int)( (atk/other.def) * move.basePower * ( (2 * level + 10)/62.5) * random(0.85, 1)));
+      damage = (int)( (atk/other.def) * move.basePower * ( (2 * level + 10)/62.5) * random(0.85, 1));
+      other.applyDamage(damage);
     }
+    return damage;
   }
   
   //get methods
@@ -104,7 +107,7 @@ abstract class Fighter{
   }
   
   public String attack(Fighter other){
-    int damage = (int)(random(atk/2, atk * 2));
+    int damage = (int)(random(atk/2, atk));
     other.applyDamage(damage);
     return (this + " attacked " + other + " for " + damage + " damage!");
   }
