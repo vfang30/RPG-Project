@@ -184,11 +184,11 @@ class Combat{
     current = turnOrder.get(cur);
     textSize(50);
     fill(255);
-    text(current.getSpeed(), 400, 400);
-    text(turn, 500, 400);
-    if (selMove != null){
-    text(selMove.name, 600, 400);
-    }
+    //text(current.getSpeed(), 400, 400);
+    //text(turn, 500, 400);
+    //if (selMove != null){
+    //text(selMove.name, 600, 400);
+    //}
 
     cycle += 0.08;
     if ((int)cycle > 1){
@@ -359,12 +359,22 @@ class Combat{
 
    void drawMoves(){
      fill(0);
-     rect(0, 650, 1200, 250);
-
-     textSize(20);
+     rect(0, 550, 1200, 350);
+     textSize(35);
      fill(255);
+     
+     Move cur = current.moveList[option];
+     text("Power: "+cur.basePower, 50, 600);
+     text("Accuracy: "+cur.accuracy + "%", 50, 680);
+     text("Mana: "+cur.mana, 450, 600);
+     int cooldown = cur.cooldown - cur.turnsSince;
+     if (cooldown < 0){
+     cooldown = 0;
+     }
+     text("Cooldown: "+cooldown, 450, 680);
 
      for (int i = 0; i < 4; i +=1){
+       textSize(20);
        if (option == i){
          image(moveIconSel, (i * 300), 720);
        }else{
