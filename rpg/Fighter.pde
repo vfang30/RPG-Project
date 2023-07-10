@@ -65,6 +65,15 @@ abstract class Fighter{
     return "" +  damage;
   }
   
+  //move cooldown update
+  public void update(){
+    for (int i = 0; i < moveList.length; i +=1){
+      if (moveList[i] != null){
+        moveList[i].turnsSince +=1;
+      }
+    }
+  }
+  
   //get methods
   public String getName(){
     return name;

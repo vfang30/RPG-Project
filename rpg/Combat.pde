@@ -126,6 +126,7 @@ class Combat{
         if (current.mana > current.maxMana){
         current.mana = current.maxMana;
         }
+        current.update();
         turn +=1;
         cur +=1;
 
@@ -134,11 +135,11 @@ class Combat{
         menu = false;
         item = true;
 
-        }else if (moves && current.moveList[option].mana <= current.mana) {
-        optionReset();
+        }else if (moves && current.moveList[option].mana <= current.mana && current.moveList[option].turnsSince >= current.moveList[option].cooldown) {
         selMove = current.moveList[option];
         moves = false;
         target = true;
+        optionReset();
 
         }else if (target)  {
         target = false;
@@ -360,7 +361,7 @@ class Combat{
      fill(0);
      rect(0, 650, 1200, 250);
 
-     textSize(40);
+     textSize(20);
      fill(255);
 
      for (int i = 0; i < 4; i +=1){
@@ -370,7 +371,7 @@ class Combat{
          image(moveIcon, (i * 300), 720);
        }
        if (current.moveList[i] != null){
-         text(current.moveList[i].name, (i * 290) + 80, 800);
+         text(current.moveList[i].name, (i * 290) + 100, 790);
        }
      }
    }
@@ -426,6 +427,7 @@ class Combat{
    }
 
    void drawAttack(){
+     current.update();
      current.attack = true;
      image(current.atkCycle[(int)attackCycle], current.xPos, (current.yPos * 130) + 120);
      attackCycle += 0.15;
@@ -440,6 +442,7 @@ class Combat{
          selected = enemies.get(option);
         dmg = current.damage(selMove, selected);
         current.mana -= selMove.mana;
+        selMove.turnsSince = 0;
         optionReset();
        }
 

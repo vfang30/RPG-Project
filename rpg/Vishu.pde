@@ -20,8 +20,10 @@ class Vishu extends Fighter{
       super.atkCycle[i] = image;
     }
     
-    Move slice = new Move("Slice", Move.ATTACKING, 30, 100, 5);
+    Move slice = new Move("Slice", Move.ATTACKING, 30, 100, 5, 0);
+    Move heavySlice = new Move("Heavy Slice", Move.ATTACKING, 50, 80, 8, 1);
     super.moveList[0] = slice;
+    super.moveList[1] = heavySlice;
 
   }
 }
