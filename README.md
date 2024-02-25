@@ -1,7 +1,7 @@
 # RPG Project
 * All assets are placeholders
 
-A hobby project I started in the summer of 2023. Most features and ideas for the game are not finalized. 
+A hobby project I started in the summer of 2023. Most features and ideas for the game are not finalized and the game is still work in progress.
 
 Currently, the overworld is a 2D side scroller where the player can move around and jump.
 
